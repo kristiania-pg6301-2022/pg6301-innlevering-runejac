@@ -1,0 +1,31 @@
+{
+  "name": "innlevering-quiz-med-server-heroku",
+  "version": "1.0.0",
+  "description": "* [x] lag client siden\r * [x] lag tester for client\r * [ ] coveralls io\r * [ ] lag server siden\r * [ ] lag tester for server\r * [ ] deploy til Heroku",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm start",
+    "dev": "parcel index.html",
+    "test": "jest",
+    "clean": "rimraf dist .parcel-cache",
+    "format": "prettier --write *.{ts,jsx,js,tsx} __tests__/**/*.{ts,jsx,js,tsx}",
+    "format:check": "prettier --check *.{ts,jsx,js,tsx} __tests__/**/*.{ts,jsx,js,tsx}",
+    "lint": "eslint **/*.{ts,tsx,js,jsx}",
+    "test:coverage": "jest --coverage",
+    "verify": "cd client && npm run format:check && tsc && npm run lint && npm run test:coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/runejac/innlevering-quiz-med-server-heroku.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/runejac/innlevering-quiz-med-server-heroku/issues"
+  },
+  "homepage": "https://github.com/runejac/innlevering-quiz-med-server-heroku#readme",
+  "devDependencies": {
+    "prettier": "^2.5.1"
+  }
+}
