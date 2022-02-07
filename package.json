@@ -56,5 +56,17 @@
       "@babel/preset-react",
       "@babel/preset-typescript"
     ]
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "collectCoverageFrom": [
+      "**/*.{jsx,tsx,ts,js}",
+      "!.eslintrc.js",
+      "!coverage/**",
+      "!dist/**",
+      "!babel.config.js",
+      "!index.tsx",
+      "!config/**"
+    ]
   }
 }
