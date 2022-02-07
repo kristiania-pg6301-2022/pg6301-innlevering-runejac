@@ -1,0 +1,67 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "npm start",
+    "dev": "parcel index.html",
+    "test": "jest",
+    "clean": "rimraf dist .parcel-cache",
+    "format": "prettier --write *.{ts,jsx,js,tsx} __tests__/**/*.{ts,jsx,js,tsx}",
+    "format:check": "prettier --check *.{ts,jsx,js,tsx} __tests__/**/*.{ts,jsx,js,tsx}",
+    "lint": "eslint **/*.{ts,tsx,js,jsx}",
+    "test:coverage": "jest --coverage",
+    "verify": "npm run format:check && tsc && npm run lint && npm run test:coverage"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "main": "index.js",
+  "description": "",
+  "devDependencies": {
+    "@babel/core": "^7.17.0",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "@babel/preset-typescript": "^7.16.7",
+    "@types/jest": "^27.4.0",
+    "@types/react-dom": "^17.0.11",
+    "@types/react-router-dom": "^5.3.3",
+    "@typescript-eslint/eslint-plugin": "^5.11.0",
+    "@typescript-eslint/parser": "^5.11.0",
+    "babel-jest": "^27.5.0",
+    "eslint": "^8.8.0",
+    "eslint-plugin-react": "^7.28.0",
+    "jest": "^27.5.0",
+    "parcel": "^2.2.1",
+    "prettier": "^2.5.1",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.5.5"
+  },
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^6.2.1"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react",
+      "@babel/preset-typescript"
+    ]
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "collectCoverageFrom": [
+      "**/*.{jsx,tsx,ts,js}",
+      "!.eslintrc.js",
+      "!coverage/**",
+      "!dist/**",
+      "!babel.config.js",
+      "!index.tsx",
+      "!config/**"
+    ]
+  },
+  "engines": {
+    "node": "16.13.1",
+    "npm": "8.4.1"
+  }
+}
