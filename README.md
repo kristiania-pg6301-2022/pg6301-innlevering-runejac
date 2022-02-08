@@ -2,9 +2,6 @@
 
 [![Run test](https://github.com/kristiania-pg6301-2022/pg6301-innlevering-runejac/actions/workflows/test.yml/badge.svg)](https://github.com/kristiania-pg6301-2022/pg6301-innlevering-runejac/actions/workflows/test.yml)
 
-[![Coverage](.github/badges/jacoco.svg)](https://github.
-com/kristiania-pg6301-2022/pg6301-innlevering-runejac/actions
-/workflows/test.yml)
 
 * [x] lag client siden
 * [x] lag tester for client
