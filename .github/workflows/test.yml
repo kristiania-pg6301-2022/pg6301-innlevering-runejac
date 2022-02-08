@@ -17,8 +17,8 @@ jobs:
           cache: 'npm'
       - run: npm ci
       - run: npm run verify
-      - name: Codecov
-        uses: codecov/codecov-action@master
+      - name: Code Coverage Report
+        uses: romeovs/lcov-reporter-action@v0.2.16
         with:
-          file: client/coverage/lcov.info
-          token: ${{ secrets.CODECOV_TOKEN }}
+          lcov-file: client/coverage/lcov.info
+          github-token: ${{ secrets.GITHUB_TOKEN }}
