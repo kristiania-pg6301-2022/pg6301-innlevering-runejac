@@ -20,5 +20,5 @@ jobs:
       - name: Codecov
         uses: codecov/codecov-action@master
         with:
-          lcov-file: client/coverage/lcov.info
-          github-token: ${{ secrets.CODECOV_TOKEN }}
+          file: client/coverage/lcov.info
+          token: ${{ secrets.CODECOV_TOKEN }}
