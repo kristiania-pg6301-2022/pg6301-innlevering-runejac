@@ -2,11 +2,69 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "ts-node server.ts",
+    "dev": "nodemon --ext ts,js,json --exec npm start",
+    "format": "prettier --write **/*.{tsx,jsx,ts,js,html,json}",
+    "format:check": "prettier --check **/*.{tsx,jsx,ts,js,html,json}",
+    "test": "jest",
+    "verify": "npm run format:check && tsc",
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.17.2",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-typescript": "^7.16.7",
+    "@types/body-parser": "^1.19.2",
+    "@types/cookie-parser": "^1.4.2",
+    "@types/express": "^4.17.13",
+    "@types/jest": "^27.4.0",
+    "@types/supertest": "^2.0.11",
+    "@typescript-eslint/eslint-plugin": "^5.11.0",
+    "@typescript-eslint/parser": "^5.11.0",
+    "babel": "^6.23.0",
+    "babel-jest": "^27.5.1",
+    "eslint": "^8.8.0",
+    "jest": "^27.5.1",
+    "nodemon": "^2.0.15",
+    "parcel": "^2.2.1",
+    "prettier": "^2.5.1",
+    "supertest": "^6.2.2",
+    "typescript": "^4.5.5"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.1",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.2",
+    "ts-node": "^10.5.0"
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ],
+      "@babel/preset-typescript"
+    ]
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "**/*.{jsx,tsx,ts,js}",
+      "!.eslintrc.js",
+      "!coverage/**",
+      "!dist/**",
+      "!babel.config.js",
+      "!index.tsx",
+      "!config/**"
+    ]
+  }
 }
