@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npm start",
-    "dev": "parcel index.html",
+    "dev": "cd client && parcel index.html",
     "test": "jest",
     "clean": "rimraf dist .parcel-cache",
     "format": "prettier --write *.{ts,jsx,js,tsx} __tests__/**/*.{ts,jsx,js,tsx}",

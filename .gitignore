@@ -4,3 +4,4 @@
 /.idea
 /client/coverage
 /node_modules
+/.parcel-cache
