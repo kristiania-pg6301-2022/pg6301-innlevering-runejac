@@ -4,3 +4,5 @@
 /.idea
 /client/coverage
 /node_modules
+/coverage/
+/coverage.data
