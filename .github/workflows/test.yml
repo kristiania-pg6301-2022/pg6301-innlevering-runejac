@@ -18,6 +18,7 @@ jobs:
       - run: npm ci
       - run: npm run verify
       - name: Coveralls
+        ${{ NODE_COVERALLS_DEBUG=1 }}
         uses: coverallsapp/github-action@master
         with:
           path-to-lcov: client/coverage/lcov.info
