@@ -18,6 +18,8 @@ interface IQuestionProps {
   setCorrectAnswered?: Dispatch<SetStateAction<number>>;
 }
 
+let testPushToCoveralls;
+
 export function FrontPage(config: IQuestionProps) {
   return (
     <div>
@@ -25,7 +27,6 @@ export function FrontPage(config: IQuestionProps) {
       <h4 className={"correct-or-wrong-txt"} data-testid={"frontpage-status"}>
         {config.correctAnswered} / {config.questionsAnswered} rette
       </h4>
-
       <div>
         <Link className={"home"} to={"/question"}>
           Ny quiz
