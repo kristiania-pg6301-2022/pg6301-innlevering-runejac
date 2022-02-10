@@ -18,8 +18,6 @@ interface IQuestionProps {
   setCorrectAnswered?: Dispatch<SetStateAction<number>>;
 }
 
-let testPushToCoveralls;
-
 export function FrontPage(config: IQuestionProps) {
   return (
     <div>
