@@ -72,6 +72,9 @@
       "!babel.config.js",
       "!index.tsx",
       "!config/**"
+    ],
+    "modulePaths": [
+      "<rootDir>"
     ]
   },
   "engines": {
