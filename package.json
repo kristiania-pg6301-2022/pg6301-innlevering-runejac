@@ -10,8 +10,8 @@
     "format:check": "prettier --check **/*.{js,ts,tsx,jsx,json,html}",
     "clean": "rimraf dist .parcel-cache",
     "verify": "npm run verify:server && npm run verify:client",
-    "verify:server": "cd server && npm run verify",
-    "verify:client": "cd client && npm run verify"
+    "verify:server": "cd server && npm ci && npm run verify",
+    "verify:client": "cd client && npm ci && npm run verify"
   },
   "repository": {
     "type": "git",
