@@ -1,4 +1,4 @@
-import bodyParser from "express";
+import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import request from "supertest";
 import express from "express";
