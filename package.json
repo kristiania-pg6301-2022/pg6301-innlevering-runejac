@@ -6,6 +6,8 @@
     "start": "npm start",
     "dev": "cd client && parcel index.html",
     "test": "jest",
+    "format": "prettier --write **/*.{ts,jsx,js,tsx}",
+    "format:check": "prettier --check **/*.{js,ts,tsx,jsx}",
     "clean": "rimraf dist .parcel-cache",
     "verify": "cd client && npm run verify"
   },
