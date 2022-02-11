@@ -70,9 +70,6 @@
       "!babel.config.js",
       "!index.tsx",
       "!config/**"
-    ],
-    "transform": {
-      "\\.ts$": "<rootDir>/node_modules/babel-jest"
-    }
+    ]
   }
 }
