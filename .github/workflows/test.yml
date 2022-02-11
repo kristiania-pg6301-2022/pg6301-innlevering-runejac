@@ -16,18 +16,14 @@ jobs:
           node-version: 16.x
           cache: 'npm'
       - run: npm ci
-      - run: npm run verify
-      - name: Test ${{ matrix.test_number }}
-        run: make test-coverage-${{ matrix.test_number }}
-      - name: Coveralls Paralell
+      - run: npm run verify, make test-coverage
+      - name: Coveralls
         uses: coverallsapp/github-action@master
         env:
           NODE_COVERALLS_DEBUG: 1
         with:
           path-to-lcov: client/coverage/lcov.info
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          flag-name: run-${{ matrix.test_number }}
-          parallel: true
 
   finish:
     needs: test
@@ -37,4 +33,3 @@ jobs:
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.github_token }}
-          parallel-finished: true
