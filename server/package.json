@@ -11,8 +11,7 @@
     "lint": "eslint **/*.{ts,tsx,js,jsx}",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "verify": "npm run format:check && tsc && npm run lint && npm run test:coverage",
-    "prepare": "husky install"
+    "verify": "npm run format:check && tsc && npm run lint && npm run test:coverage"
   },
   "keywords": [],
   "author": "",
