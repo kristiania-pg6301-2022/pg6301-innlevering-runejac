@@ -11,7 +11,8 @@
     "clean": "rimraf dist .parcel-cache",
     "verify": "npm run verify:server && npm run verify:client",
     "verify:server": "cd server && npm ci && npm run verify",
-    "verify:client": "cd client && npm ci && npm run verify"
+    "verify:client": "cd client && npm ci && npm run verify",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
