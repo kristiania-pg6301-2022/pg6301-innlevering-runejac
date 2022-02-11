@@ -72,5 +72,5 @@
       "!config/**"
     ]
   },
-  "type": "module"
+  "type": "commonjs"
 }
