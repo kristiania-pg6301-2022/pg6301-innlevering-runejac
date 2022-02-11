@@ -52,6 +52,7 @@
   },
   "jest": {
     "testEnvironment": "jsdom",
+    "coverageDirectory": "./coverage/",
     "collectCoverageFrom": [
       "**/*.{jsx,tsx,ts,js}",
       "!.eslintrc.js",
