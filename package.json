@@ -72,14 +72,10 @@
       "!babel.config.js",
       "!index.tsx",
       "!config/**"
-    ],
-    "modulePaths": ["<rootDir>"]
+    ]
   },
   "engines": {
     "node": "16.13.1",
     "npm": "8.4.1"
-  },
-  "transform": {
-    "\\.ts$": "<rootDir>/server/node_modules/babel-jest"
   }
 }
