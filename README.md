@@ -1,6 +1,6 @@
 # Innlevering, deploy quiz frontend and server to Heroku
 
-[![Run test](https://github.com/kristiania-pg6301-2022/pg6301-innlevering-runejac/actions/workflows/test.yml/badge.svg)](https://github.com/kristiania-pg6301-2022/pg6301-innlevering-runejac/actions/workflows/test.yml)
+[![Build](https://github.com/runejac/web-api-own-account-innlevering-runejac/actions/workflows/test.yml/badge.svg)](https://github.com/runejac/web-api-own-account-innlevering-runejac/actions/workflows/test.yml)
 
 
 * [x] lag client siden
