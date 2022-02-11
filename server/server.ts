@@ -18,7 +18,7 @@ app.use("/question", QuizApp);
   );
 }); */
 
-QuizApp.get("/random", function (req: any, res: any, next: any) {
+QuizApp.get("/random", function (req, res, next) {
   const { id, category, answers, question } = randomQuestion();
   res.send({ id, category, question, answers });
 });
