@@ -71,6 +71,5 @@
       "!index.tsx",
       "!config/**"
     ]
-  },
-  "type": "module"
+  }
 }
