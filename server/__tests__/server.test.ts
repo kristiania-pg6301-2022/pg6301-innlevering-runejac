@@ -1,7 +1,7 @@
-import express from "express";
 import bodyParser from "express";
 import cookieParser from "cookie-parser";
 import request from "supertest";
+import express from "express";
 import { QuizApp } from "../server";
 
 const app = express();
