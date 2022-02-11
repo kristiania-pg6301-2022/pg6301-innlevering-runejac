@@ -8,6 +8,11 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        test_number:
+          - 1
+          - 2
 
     steps:
       - uses: actions/checkout@v2
@@ -17,10 +22,24 @@ jobs:
           cache: 'npm'
       - run: npm ci
       - run: npm run verify
-      - name: Coveralls
+      - name: Test ${{ matrix.test_number }}
+        run: make test-coverage-${{ matrix.test_number }}
+      - name: Coveralls Paralell
         uses: coverallsapp/github-action@master
         env:
           NODE_COVERALLS_DEBUG: 1
         with:
           path-to-lcov: client/coverage/lcov.info
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          flag-name: run-${{ matrix.test_number }}
+          parallel: true
+
+  finish:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Coveralls Finished
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.github_token }}
+          parallel-finished: true
