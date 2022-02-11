@@ -6,10 +6,12 @@
     "start": "npm start",
     "dev": "cd client && parcel index.html",
     "test": "jest",
-    "format": "prettier --write **/*.{ts,jsx,js,tsx}",
-    "format:check": "prettier --check **/*.{js,ts,tsx,jsx}",
+    "format": "prettier --write **/*.{ts,jsx,js,tsx,json,html}",
+    "format:check": "prettier --check **/*.{js,ts,tsx,jsx,json,html}",
     "clean": "rimraf dist .parcel-cache",
-    "verify": "cd client && npm run verify"
+    "verify": "npm run verify:server && npm run verify:client",
+    "verify:server": "cd server && npm run verify",
+    "verify:client": "cd client && npm run verify"
   },
   "repository": {
     "type": "git",
