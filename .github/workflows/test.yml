@@ -34,5 +34,5 @@ jobs:
         env:
           NODE_COVERALLS_DEBUG: 1
         with:
-          path-to-lcov: client/coverage/lcov.info
+          path-to-lcov: ../client/coverage/lcov.info
           github-token: ${{ secrets.github_token }}
