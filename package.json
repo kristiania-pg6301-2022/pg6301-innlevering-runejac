@@ -87,7 +87,7 @@
       "!coverage/**",
       "!dist/**",
       "!babel.config.js",
-      "!index.tsx",
+      "!client/index.tsx",
       "!config/**"
     ]
   },
