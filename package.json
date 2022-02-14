@@ -86,6 +86,8 @@
       "**/*.{jsx,tsx,ts,js}",
       "!.eslintrc.js",
       "!coverage/**",
+      "!client/coverage/**",
+      "!client/dist/**",
       "!dist/**",
       "!babel.config.js",
       "!client/index.tsx",

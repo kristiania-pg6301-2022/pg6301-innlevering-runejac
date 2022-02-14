@@ -18,3 +18,10 @@ QuizApp.get(
     res.send({ id, category, question, answers });
   }
 );
+
+QuizApp.get(
+  "/",
+  function (_req: express.Request, res: express.Response, _next: NextFunction) {
+    res.send("Hello world");
+  }
+);
