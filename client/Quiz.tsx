@@ -11,14 +11,14 @@ import { isCorrectAnswer, randomQuestion } from "./questions";
 
 export const QuestionContext = createContext({ randomQuestion });
 
-interface IQuestionProps {
+interface QuestionProps {
   readonly correctAnswered: number;
   readonly questionsAnswered: number;
   setQuestionsAnswered?: Dispatch<SetStateAction<number>>;
   setCorrectAnswered?: Dispatch<SetStateAction<number>>;
 }
 
-export function FrontPage(config: IQuestionProps) {
+export function FrontPage(config: QuestionProps) {
   return (
     <div>
       <h1 className={"correct-or-wrong-txt"}>Ta en quiz</h1>
@@ -34,7 +34,7 @@ export function FrontPage(config: IQuestionProps) {
   );
 }
 
-export function MapQuestions(config: IQuestionProps) {
+export function MapQuestions(config: QuestionProps) {
   const navigate = useNavigate();
   const { randomQuestion } = useContext(QuestionContext);
   const [question] = useState(randomQuestion());

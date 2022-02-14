@@ -32,7 +32,6 @@ describe("quiz pages", () => {
   afterEach(() => {
     // cleanup on exiting
     unmountComponentAtNode(container);
-    container.remove();
   });
 
   /**-------------------------------------------------------------------------------------**/

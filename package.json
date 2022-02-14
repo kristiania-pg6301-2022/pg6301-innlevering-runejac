@@ -17,15 +17,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/runejac/innlevering-quiz-med-server-heroku.git"
+    "url": "git+https://github.com/runejac/web-api-own-account-innlevering-runejac"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/runejac/innlevering-quiz-med-server-heroku/issues"
+    "url": "https://github.com/runejac/web-api-own-account-innlevering-runejac/issues"
   },
-  "homepage": "https://github.com/runejac/innlevering-quiz-med-server-heroku#readme",
+  "homepage": "https://github.com/runejac/web-api-own-account-innlevering-runejac#readme",
   "devDependencies": {
     "@babel/core": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
