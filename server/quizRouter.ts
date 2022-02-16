@@ -51,12 +51,10 @@ QuizRouter.post("/question/answer", (req, res) => {
   let isCorrect = false;
   const correctValue = req.body.answer + "_correct";
 
-  console.log(correctValue);
-
   for (const correctQuestion in question.correct_answers) {
     if (
       correctQuestion === correctValue &&
-      question?.correct_answers[correctQuestion] === "true"
+      question.correct_answers[correctQuestion] === "true"
     ) {
       isCorrect = true;
     }

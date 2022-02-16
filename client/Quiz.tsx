@@ -41,21 +41,27 @@ export function FrontPage(config: QuestionProps) {
 
 export function MapQuestions(config: QuestionProps) {
   const navigate = useNavigate();
-  const [question, setQuestion] = useState<Question>();
+  const [questionApi, setQuestionApi] = useState<Question>();
   const [isLoading, setIsLoading] = useState(false);
 
-  // @ts-ignore
   // får spørsmål generert fra api kall
-  useEffect(async () => {
+  // GET
+  const getQuestion = async () => {
     const response = await fetch("api/question/random");
     const questionData = await response.json();
+    setQuestionApi(questionData);
+  };
 
-    setQuestion(questionData);
+  // kaller på funksjon i useEffect, ellers fikk jeg TS error TS2345
+  // GET
+  useEffect(() => {
+    getQuestion().catch((error) => {
+      console.error("Error with fetch (GET) operation:", error);
+    });
   }, []);
 
-  // funker ikke helt å poste svar ennå, får 404, men har med post requesten
-  // i quizRouter å gjøre antageligvis
   function checkAnswer(answer: string, id: number) {
+    // POST
     fetch("api/question/answer", {
       method: "POST",
       headers: {
@@ -65,9 +71,14 @@ export function MapQuestions(config: QuestionProps) {
         answer: answer,
         id: id,
       }),
+    }).catch((error) => {
+      console.error(
+        "There has been a problem with your fetch (POST) operation:",
+        error
+      );
     });
 
-    const result = isCorrectAnswer(question, answer);
+    const result = isCorrectAnswer(questionApi, answer);
     config.setQuestionsAnswered?.((q: number) => q + 1);
 
     if (result) {
@@ -78,21 +89,21 @@ export function MapQuestions(config: QuestionProps) {
     }
   }
 
-  if (!question) return <h2>Loading...</h2>;
+  if (!questionApi) return <h2>Loading...</h2>;
 
   return (
     <>
-      <h2>{question.question}</h2>
+      <h2>{questionApi.question}</h2>
       <div>
-        {Object.keys(question.answers).map((answer: string) =>
-          question.answers[answer] == null ? null : (
+        {Object.keys(questionApi.answers).map((answer: string) =>
+          questionApi.answers[answer] == null ? null : (
             <div key={answer} data-testid={answer}>
               <button
                 className={"button"}
                 name={"answer"}
-                onClick={() => checkAnswer(answer, question.id)}
+                onClick={() => checkAnswer(answer, questionApi.id)}
               >
-                {question.answers[answer]}
+                {questionApi.answers[answer]}
               </button>
             </div>
           )
