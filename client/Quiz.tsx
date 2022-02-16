@@ -41,7 +41,7 @@ export function FrontPage(config: QuestionProps) {
 
 export function MapQuestions(config: QuestionProps) {
   const navigate = useNavigate();
-  const [question, setQuestion] = useState<Question | undefined>(undefined);
+  const [question, setQuestion] = useState<Question>();
   const [isLoading, setIsLoading] = useState(false);
 
   // @ts-ignore
@@ -55,7 +55,7 @@ export function MapQuestions(config: QuestionProps) {
 
   // funker ikke helt å poste svar ennå, får 404, men har med post requesten
   // i quizRouter å gjøre antageligvis
-  function checkAnswer(answer: string) {
+  function checkAnswer(answer: string, id: number) {
     fetch("api/question/answer", {
       method: "POST",
       headers: {
@@ -63,6 +63,7 @@ export function MapQuestions(config: QuestionProps) {
       },
       body: JSON.stringify({
         answer: answer,
+        id: id,
       }),
     });
 
@@ -89,7 +90,7 @@ export function MapQuestions(config: QuestionProps) {
               <button
                 className={"button"}
                 name={"answer"}
-                onClick={() => checkAnswer(answer)}
+                onClick={() => checkAnswer(answer, question.id)}
               >
                 {question.answers[answer]}
               </button>

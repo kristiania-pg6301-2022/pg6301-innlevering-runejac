@@ -1,5 +1,6 @@
 export interface Question {
-  id?: number;
+  // todo egen info: endret id til ikke-optional, for POST req
+  id: number;
   question: string;
   description?: string | null;
   explanation?: string | null;

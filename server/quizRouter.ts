@@ -4,6 +4,8 @@ import {
   Questions,
   randomQuestion,
 } from "../client/questions";
+import { Simulate } from "react-dom/test-utils";
+import cookieParser from "cookie-parser";
 
 export const QuizRouter = express.Router();
 
@@ -16,7 +18,7 @@ QuizRouter.get(
   }
 );
 
-/* QuizRouter.post("/question/answer", function (req, res, _next) {
+/*QuizRouter.post("/question/answer", function (req, res, _next) {
   const { id, answer } = req.body;
   const question = Questions.find((q) => q.id === id);
 
@@ -38,25 +40,29 @@ QuizRouter.get(
     res.cookie("score", JSON.stringify(score), { signed: true });
     res.json({ result: "incorrect" });
   }
-}); */
+});*/
 
 QuizRouter.post("/question/answer", (req, res) => {
-  const question = Questions.find((q) => {
-    return q.id === parseInt(req.body.id);
-  });
+  const question = Questions.find((q) => q.id === parseInt(req.body.id));
 
-  if (!question) res.status(404);
+  console.log(question);
+  if (!question) return res.status(404).send("POST REQ NOT FOUND");
 
-  let answerKey = req.body.answer + "_correct";
-  console.log(answerKey);
   let isCorrect = false;
+  const correctValue = req.body.answer + "_correct";
 
-  for (const key in question?.correct_answers) {
-    if (key === answerKey && question?.correct_answers[key] === "true") {
+  console.log(correctValue);
+
+  for (const correctQuestion in question.correct_answers) {
+    if (
+      correctQuestion === correctValue &&
+      question?.correct_answers[correctQuestion] === "true"
+    ) {
       isCorrect = true;
-      res.json({ isCorrect: isCorrect });
-    } else {
-      res.json({ isCorrect: !isCorrect });
     }
   }
+
+  res.json({
+    isCorrect: isCorrect,
+  });
 });
