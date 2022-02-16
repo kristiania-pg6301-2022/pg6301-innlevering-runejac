@@ -1,0 +1,21 @@
+### Generate random question
+GET {{server}}/question
+
+
+### Correct answer
+POST {{server}}/question/answer/correct
+Content-Type: application/json
+
+{
+  "id": 974,
+  "answer": "answer_b"
+}
+
+### Incorrect answer
+POST {{server}}/question/answer/wrong
+Content-Type: application/json
+
+{
+  "id": 976,
+  "answer": "answer_d"
+}

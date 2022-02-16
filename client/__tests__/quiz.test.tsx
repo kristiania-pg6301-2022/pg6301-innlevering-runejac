@@ -81,7 +81,7 @@ describe("quiz pages", () => {
     expect(container.innerHTML).toMatchSnapshot();
   });
 
-  it("should register correct answer with simulate click", function () {
+  it("should register correct answer with simulate click", async function () {
     const setQuestionsAnswered = jest.fn();
     const setCorrectAnswered = jest.fn();
 

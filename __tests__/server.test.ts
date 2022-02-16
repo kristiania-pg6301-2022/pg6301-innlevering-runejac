@@ -15,13 +15,11 @@ describe("Start testing server side", function () {
   });
 
   it("should return status code 404, wrong url", async function () {
-    await request(app).get("/questiond/random").expect(404);
+    await request(app).get("/questiond").expect(404);
   });
 
   it("should return a random question with its properties", async function () {
-    const response = await request(app).get(
-      "/question/random"
-    ); /* .expect(404) */
+    const response = await request(app).get("/question/random");
     expect(response.body).toMatchObject({
       id: expect.any(Number),
       answers: expect.any(Object),
@@ -32,10 +30,20 @@ describe("Start testing server side", function () {
     expect(response.body).not.toHaveProperty("correct_answers");
   });
 
-  it("should respond to / and check content-type", async function () {
-    const response = await request(app).get("/question/");
+  it("should respond to /helloworld and check content-type", async function () {
+    const response = await request(app).get("/question/helloworld");
     expect(response.header["content-type"]).toBe("text/html; charset=utf-8");
     expect(response.statusCode).toBe(200);
     expect(response.text).toEqual("Hello world");
+  });
+
+  it("should respond to correct answers", async function () {
+    await request(app)
+      .post("/question/answer")
+      .send({
+        id: 974,
+        answer: "answer_b",
+      })
+      .expect({ result: "correct" });
   });
 });

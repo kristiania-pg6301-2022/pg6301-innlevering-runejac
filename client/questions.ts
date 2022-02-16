@@ -20,8 +20,11 @@ export function randomQuestion(): Question {
   return Questions[Math.trunc(Math.random() * Questions.length)];
 }
 
-export function isCorrectAnswer(question: Question, answer: string) {
-  return question.correct_answers[answer + "_correct"] === "true";
+export function isCorrectAnswer(
+  question: Question | undefined,
+  answer: string
+) {
+  return question?.correct_answers[answer + "_correct"] === "true";
 }
 
 // Generated from https://quizapi.io/api/v1/questions?category=code&limit=10&tags=JavaScript

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   createContext,
   Dispatch,
@@ -7,7 +7,12 @@ import {
   useState,
 } from "react";
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
-import { isCorrectAnswer, randomQuestion } from "./questions";
+import {
+  isCorrectAnswer,
+  Question,
+  Questions,
+  randomQuestion,
+} from "./questions";
 
 export const QuestionContext = createContext({ randomQuestion });
 
@@ -36,12 +41,35 @@ export function FrontPage(config: QuestionProps) {
 
 export function MapQuestions(config: QuestionProps) {
   const navigate = useNavigate();
-  const { randomQuestion } = useContext(QuestionContext);
-  const [question] = useState(randomQuestion());
+  const [question, setQuestion] = useState<Question | undefined>(undefined);
+  const [isLoading, setIsLoading] = useState(false);
 
+  // @ts-ignore
+  // får spørsmål generert fra api kall
+  useEffect(async () => {
+    const response = await fetch("api/question/random");
+    const questionData = await response.json();
+
+    setQuestion(questionData);
+  }, []);
+
+  // funker ikke helt å poste svar ennå, får 404, men har med post requesten
+  // i quizRouter å gjøre antageligvis
   function checkAnswer(answer: string) {
+    fetch("api/question/answer", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        answer: answer,
+      }),
+    });
+
+    const result = isCorrectAnswer(question, answer);
     config.setQuestionsAnswered?.((q: number) => q + 1);
-    if (isCorrectAnswer(question, answer)) {
+
+    if (result) {
       config.setCorrectAnswered?.((q: number) => q + 1);
       navigate("/answer/correct");
     } else {
@@ -49,10 +77,11 @@ export function MapQuestions(config: QuestionProps) {
     }
   }
 
+  if (!question) return <h2>Loading...</h2>;
+
   return (
     <>
       <h2>{question.question}</h2>
-      <h4>Category: {question.category}</h4>
       <div>
         {Object.keys(question.answers).map((answer: string) =>
           question.answers[answer] == null ? null : (
