@@ -7,6 +7,8 @@
 * [x] lag tester for client
 * [x] Github actions
 * [x] coveralls io
-* [ ] lag server siden
+* [x] GET request for questions
+* [x] POST request for answers
+* [x] lag server siden
 * [ ] lag tester for server
 * [ ] deploy til Heroku
