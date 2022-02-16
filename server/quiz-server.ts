@@ -1,3 +1,4 @@
+/*
 import express, { Express, NextFunction, Router } from "express";
 import {
   isCorrectAnswer,
@@ -50,3 +51,4 @@ QuizApp.get(
     res.send("Hello world");
   }
 );
+*/

@@ -1,6 +1,5 @@
 import express from "express";
 import { Questions, randomQuestion } from "../client/questions";
-import cookieParser from "cookie-parser";
 
 export const QuizRouter = express.Router();
 
