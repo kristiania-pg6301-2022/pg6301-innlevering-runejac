@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "description": "* [x] lag client siden\r * [x] lag tester for client\r * [ ] coveralls io\r * [ ] lag server siden\r * [ ] lag tester for server\r * [ ] deploy til Heroku",
   "scripts": {
-    "start": "npm run start:client && npm run start:server",
-    "start:client": "cd client && npm run start",
+    "start": "npm run start:server",
     "start:server": "cd server && npm run start",
     "dev": "concurrently npm:dev:server npm:dev:client",
     "dev:client": "cd client && npm run dev",
