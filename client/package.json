@@ -16,7 +16,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "main": "index.tsx",
   "description": "",
   "devDependencies": {
     "@babel/core": "^7.17.0",
