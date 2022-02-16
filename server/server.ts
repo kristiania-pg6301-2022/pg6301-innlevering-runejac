@@ -23,7 +23,9 @@ app.use(
   }
 );
 
-export const server = app.listen(process.env.PORT || 3000, function () {
+const port = process.env.PORT || 5000;
+
+export const server = app.listen(port, function () {
   console.log(
     `Starting server on http://localhost:${
       (server.address() as AddressInfo).port
