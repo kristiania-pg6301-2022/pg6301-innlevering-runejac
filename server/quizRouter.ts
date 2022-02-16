@@ -1,10 +1,5 @@
 import express from "express";
-import {
-  isCorrectAnswer,
-  Questions,
-  randomQuestion,
-} from "../client/questions";
-import { Simulate } from "react-dom/test-utils";
+import { Questions, randomQuestion } from "../client/questions";
 import cookieParser from "cookie-parser";
 
 export const QuizRouter = express.Router();
