@@ -6,10 +6,10 @@ import cookieParser from "cookie-parser";
 import path from "path";
 import { QuizRouter } from "./quizRouter";
 
+dotenv.config();
 const app: Express = express();
 app.use(bodyParser.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));
-dotenv.config();
 
 app.use("/api", QuizRouter);
 app.use(express.static(path.resolve("..", "client", "dist")));
