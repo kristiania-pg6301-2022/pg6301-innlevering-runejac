@@ -4,7 +4,12 @@
   "description": "* [x] lag client siden\r * [x] lag tester for client\r * [ ] coveralls io\r * [ ] lag server siden\r * [ ] lag tester for server\r * [ ] deploy til Heroku",
   "scripts": {
     "start": "npm start",
-    "dev": "cd client && parcel index.html",
+    "dev": "concurrently npm:dev:server npm:dev:client",
+    "dev:client": "cd client && npm run dev",
+    "dev:server": "cd server && npm run dev",
+    "build": "npm run build:server && npm run build:client",
+    "build:client": "cd client && npm ci --include=dev && npm run build",
+    "build:server": "cd server && npm ci",
     "test": "jest",
     "format": "prettier --write **/*.{ts,jsx,js,tsx,json,html}",
     "format:check": "prettier --check **/*.{js,ts,tsx,jsx,json,html}",

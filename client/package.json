@@ -4,6 +4,7 @@
   "scripts": {
     "start": "npm start",
     "dev": "parcel index.html",
+    "build": "parcel build index.html",
     "test": "jest",
     "clean": "rimraf dist .parcel-cache",
     "format": "prettier --write *.{ts,jsx,js,tsx} .././__tests__/**/*.{ts,jsx,js,tsx}",

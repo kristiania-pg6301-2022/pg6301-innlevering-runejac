@@ -45,7 +45,6 @@ QuizRouter.get(
 QuizRouter.post("/question/answer", (req, res) => {
   const question = Questions.find((q) => q.id === parseInt(req.body.id));
 
-  console.log(question);
   if (!question) return res.status(404).send("POST REQ NOT FOUND");
 
   let isCorrect = false;
