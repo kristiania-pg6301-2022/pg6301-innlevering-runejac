@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.ts",
   "scripts": {
-    "start": "ts-node server.ts",
+    "start": "node server.ts",
     "dev": "nodemon --ext ts,js,json --exec npm start",
     "format": "prettier --write **/*.{tsx,jsx,ts,js,html,json}",
     "format:check": "prettier --check **/*.{tsx,jsx,ts,js,html,json}",
