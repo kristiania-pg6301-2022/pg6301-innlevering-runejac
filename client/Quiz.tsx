@@ -7,12 +7,18 @@ import {
   useState,
 } from "react";
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
-import {
+/* import {
   isCorrectAnswer,
   Question,
   Questions,
   randomQuestion,
-} from "./questions";
+} from "./questions"; */
+import {
+  isCorrectAnswer,
+  QuestionAnimals,
+  Questions,
+  randomQuestion,
+} from "./quiestions-animals";
 
 export const QuestionContext = createContext({ randomQuestion });
 
@@ -41,7 +47,7 @@ export function FrontPage(config: QuestionProps) {
 
 export function MapQuestions(config: QuestionProps) {
   const navigate = useNavigate();
-  const [questionApi, setQuestionApi] = useState<Question>();
+  const [questionApi, setQuestionApi] = useState<QuestionAnimals>();
   const [isLoading, setIsLoading] = useState(false);
 
   // får spørsmål generert fra api kall
@@ -68,8 +74,8 @@ export function MapQuestions(config: QuestionProps) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        answer: answer,
-        id: id,
+        answer,
+        id,
       }),
     }).catch((error) => {
       console.error(
@@ -77,6 +83,7 @@ export function MapQuestions(config: QuestionProps) {
         error
       );
     });
+    console.log(answer, id);
 
     const result = isCorrectAnswer(questionApi, answer);
     config.setQuestionsAnswered?.((q: number) => q + 1);

@@ -9,10 +9,14 @@ import { render, unmountComponentAtNode } from "react-dom";
 import { Question } from "../questions";
 import { MemoryRouter } from "react-router-dom";
 import { Simulate } from "react-dom/test-utils";
+import "regenerator-runtime/runtime";
+import { QuestionAnimals } from "../quiestions-animals";
 
 describe("quiz pages", () => {
   let container: HTMLDivElement;
-  const question: Question = {
+  const question: QuestionAnimals = {
+    question: "Hva er det tregeste dyret i verden?",
+    id: 42,
     answers: {
       answer_a: "Skilpadden",
       answer_b: "Dovendyret",
@@ -21,7 +25,6 @@ describe("quiz pages", () => {
       answer_a_correct: "false",
       answer_b_correct: "true",
     },
-    question: "Hva er det tregeste dyret i verden?",
   };
 
   beforeEach(() => {
@@ -47,9 +50,9 @@ describe("quiz pages", () => {
   });
 
   // sjekker MapQuestions-komponent, sender antall rette og totalt spm besvart, sjekker opp mot toEqual-metoden til Jest
-  it("At MapQuestions: Should test questions answered and correct answered", function () {
-    const setQuestionsAnswered = jest.fn();
-    const setCorrectAnswered = jest.fn();
+  it("At MapQuestions: Should test questions answered and correct answered", async function () {
+    const setQuestionsAnswered = await jest.fn();
+    const setCorrectAnswered = await jest.fn();
 
     render(
       <MemoryRouter>
@@ -60,9 +63,9 @@ describe("quiz pages", () => {
           setCorrectAnswered={setCorrectAnswered}
         />
       </MemoryRouter>,
-      container
+      await container
     );
-    expect(
+    await expect(
       container.querySelector("[data-testid=map-question-status]")?.textContent
     ).toEqual("4 / 5 rette");
   });
@@ -82,8 +85,8 @@ describe("quiz pages", () => {
   });
 
   it("should register correct answer with simulate click", async function () {
-    const setQuestionsAnswered = jest.fn();
-    const setCorrectAnswered = jest.fn();
+    const setQuestionsAnswered = await jest.fn();
+    const setCorrectAnswered = await jest.fn();
 
     render(
       <MemoryRouter initialEntries={["/question"]}>
@@ -100,12 +103,15 @@ describe("quiz pages", () => {
       container
     );
 
-    Simulate.click(container.querySelector("[data-testid=answer_b] button")!);
-    expect(setQuestionsAnswered).toBeCalled();
-    expect(setCorrectAnswered).toBeCalled();
-    expect(container.innerHTML).toMatchSnapshot();
-    expect(
-      container.querySelector("[data-testid=map-question-status]")?.textContent
+    await Simulate.click(
+      container.querySelector("[data-testid=answer_b] button")!
+    );
+    await expect(setQuestionsAnswered).toBeCalled();
+    await expect(setCorrectAnswered).toBeCalled();
+    await expect(container.innerHTML).toMatchSnapshot();
+    await expect(
+      await container.querySelector("[data-testid=map-question-status]")
+        ?.textContent
     ).toEqual("1 / 1 rette");
   });
 
