@@ -1,6 +1,6 @@
 import express from "express";
-import { Questions /* randomQuestion */ } from "../client/questions";
-import { randomQuestion } from "../client/quiestions-animals";
+/* import { Questions randomQuestion } from "../client/questions"; */
+import { Questions, randomQuestion } from "../client/quiestions-animals";
 
 export const QuizRouter = express.Router();
 
