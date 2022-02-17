@@ -125,7 +125,7 @@ export function MapQuestions(config: QuestionProps) {
 
 export const ShowAnswer = () => {
   return (
-    <>
+    <div className={"show-answer-div"}>
       <Routes>
         <Route
           path={"correct"}
@@ -148,7 +148,7 @@ export const ShowAnswer = () => {
           </Link>
         </li>
       </ul>
-    </>
+    </div>
   );
 };
 

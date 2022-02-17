@@ -21,13 +21,23 @@
     color: inherit;
 }
 
+.show-answer-div {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
 .correct-or-wrong-txt {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
 }
 
 .ul {
     list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding-inline-start: 0;
 }
 
 a:link {
