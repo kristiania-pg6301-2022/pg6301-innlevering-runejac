@@ -9,7 +9,7 @@
     "dev:server": "cd server && npm run dev",
     "build": "npm run build:server && npm run build:client",
     "build:client": "cd client && npm ci --include=dev && npm run build",
-    "build:server": "cd server && npm ci",
+    "build:server": "cd server && npm ci --include=dev && npm run build",
     "test": "jest",
     "format": "prettier --write **/*.{ts,jsx,js,tsx,json,html}",
     "format:check": "prettier --check **/*.{js,ts,tsx,jsx,json,html}",
