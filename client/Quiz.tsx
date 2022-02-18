@@ -126,7 +126,7 @@ export function MapQuestions(config: QuestionProps) {
         </p>
         <p>
           <Link className={"home"} to={"/"}>
-            Hjem
+            Home
           </Link>
         </p>
       </div>
