@@ -1,5 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`quiz pages At FrontPage: Should test questions answered and correct answered 1`] = `"<div><h1 class=\\"correct-or-wrong-txt\\">Ta en quiz</h1><h4 class=\\"correct-or-wrong-txt\\" data-testid=\\"frontpage-status\\">4 / 5 rette</h4><div><a class=\\"home\\" href=\\"/question\\">Ny quiz</a></div></div>"`;
+exports[`quiz pages At FrontPage: Should test questions answered and correct answered 1`] = `"<div><h1 class=\\"correct-or-wrong-txt\\">Take a quiz</h1><h4 class=\\"correct-or-wrong-txt\\" data-testid=\\"frontpage-status\\">4 / 5 correct answered</h4><div><a class=\\"home\\" href=\\"/question\\">New quiz</a></div></div>"`;
 
-exports[`quiz pages Should only test startpage 1`] = `"<div><h1 class=\\"correct-or-wrong-txt\\">Ta en quiz</h1><h4 class=\\"correct-or-wrong-txt\\" data-testid=\\"frontpage-status\\">0 / 0 rette</h4><div><a class=\\"home\\" href=\\"/question\\">Ny quiz</a></div></div>"`;
+exports[`quiz pages Should only test startpage 1`] = `"<div><h1 class=\\"correct-or-wrong-txt\\">Take a quiz</h1><h4 class=\\"correct-or-wrong-txt\\" data-testid=\\"frontpage-status\\">0 / 0 correct answered</h4><div><a class=\\"home\\" href=\\"/question\\">New quiz</a></div></div>"`;

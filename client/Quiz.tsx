@@ -32,13 +32,13 @@ interface QuestionProps {
 export function FrontPage(config: QuestionProps) {
   return (
     <div>
-      <h1 className={"correct-or-wrong-txt"}>Ta en quiz</h1>
+      <h1 className={"correct-or-wrong-txt"}>Take a quiz</h1>
       <h4 className={"correct-or-wrong-txt"} data-testid={"frontpage-status"}>
-        {config.correctAnswered} / {config.questionsAnswered} rette
+        {config.correctAnswered} / {config.questionsAnswered} correct answered
       </h4>
       <div>
         <Link className={"home"} to={"/question"}>
-          Ny quiz
+          New quiz
         </Link>
       </div>
     </div>
@@ -58,6 +58,10 @@ export function MapQuestions(config: QuestionProps) {
     setQuestionApi(questionData);
   };
 
+  // todo forsøker noe i test med å mocke denne funksjonen
+  module.exports = {
+    getQuestion,
+  };
   // kaller på funksjon i useEffect, ellers fikk jeg TS error TS2345
   // GET
   useEffect(() => {
@@ -118,7 +122,7 @@ export function MapQuestions(config: QuestionProps) {
       </div>
       <div>
         <p data-testid={"map-question-status"}>
-          {config.correctAnswered} / {config.questionsAnswered} rette
+          {config.correctAnswered} / {config.questionsAnswered} correct answered
         </p>
         <p>
           <Link className={"home"} to={"/"}>
@@ -146,12 +150,12 @@ export const ShowAnswer = () => {
       <ul className={"ul"}>
         <li>
           <Link className={"home"} to={"/question"}>
-            Flere spørsmål
+            More questions
           </Link>
         </li>
         <li>
           <Link className={"home"} to={"/"}>
-            Hjem
+            Home
           </Link>
         </li>
       </ul>
