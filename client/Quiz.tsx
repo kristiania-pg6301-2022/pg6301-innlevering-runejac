@@ -45,6 +45,25 @@ export function FrontPage(config: QuestionProps) {
   );
 }
 
+function postAnswerHTTP(answer: string, id: number) {
+  // todo forsøker noe i test med å mocke denne funksjonen
+  fetch("api/question/answer", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      answer,
+      id,
+    }),
+  }).catch((error) => {
+    console.error(
+      "There has been a problem with your fetch (POST) operation:",
+      error
+    );
+  });
+}
+
 export function MapQuestions(config: QuestionProps) {
   const navigate = useNavigate();
   const [questionApi, setQuestionApi] = useState<QuestionAnimals>();
@@ -58,10 +77,6 @@ export function MapQuestions(config: QuestionProps) {
     setQuestionApi(questionData);
   };
 
-  // todo forsøker noe i test med å mocke denne funksjonen
-  module.exports = {
-    getQuestion,
-  };
   // kaller på funksjon i useEffect, ellers fikk jeg TS error TS2345
   // GET
   useEffect(() => {
@@ -72,21 +87,7 @@ export function MapQuestions(config: QuestionProps) {
 
   function checkAnswer(answer: string, id: number) {
     // POST
-    fetch("api/question/answer", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        answer,
-        id,
-      }),
-    }).catch((error) => {
-      console.error(
-        "There has been a problem with your fetch (POST) operation:",
-        error
-      );
-    });
+    postAnswerHTTP(answer, id);
     console.log(answer, id);
 
     const result = isCorrectAnswer(questionApi, answer);
@@ -140,11 +141,11 @@ export const ShowAnswer = () => {
       <Routes>
         <Route
           path={"correct"}
-          element={<h1 className={"correct-or-wrong-txt"}>Rett ✅</h1>}
+          element={<h1 className={"correct-or-wrong-txt"}>✅ Correct!</h1>}
         />
         <Route
           path={"wrong"}
-          element={<h1 className={"correct-or-wrong-txt"}>Feil ❌</h1>}
+          element={<h1 className={"correct-or-wrong-txt"}>❌ Wrong</h1>}
         />
       </Routes>
       <ul className={"ul"}>
