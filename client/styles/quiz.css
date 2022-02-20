@@ -67,3 +67,9 @@ body {
     max-width: 500px;
     margin: auto;
 }
+
+.error-message {
+    border: 1px solid red;
+    background: pink;
+    color: black;
+}

@@ -10,6 +10,7 @@ dotenv.config();
 const app: Express = express();
 app.use(bodyParser.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));
+const port = process.env.PORT;
 
 app.use("/api", QuizRouter);
 app.use(express.static(path.resolve("..", "client", "dist")));
@@ -22,8 +23,6 @@ app.use(
     }
   }
 );
-
-const port = process.env.PORT || 5000;
 
 export const server = app.listen(port, function () {
   console.log(

@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
-import {
+import React, {
   createContext,
   Dispatch,
   SetStateAction,
-  useContext,
+  useEffect,
   useState,
 } from "react";
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
@@ -16,9 +15,10 @@ import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import {
   isCorrectAnswer,
   QuestionAnimals,
-  Questions,
   randomQuestion,
 } from "./quiestions-animals";
+import { fetchJSON, postAnswerHTTP } from "./api/http";
+import { useLoader } from "./hooks/useLoader";
 
 export const QuestionContext = createContext({ randomQuestion });
 
@@ -45,52 +45,27 @@ export function FrontPage(config: QuestionProps) {
   );
 }
 
-function postAnswerHTTP(answer: string, id: number) {
-  // todo forsøker noe i test med å mocke denne funksjonen
-  fetch("api/question/answer", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      answer,
-      id,
-    }),
-  }).catch((error) => {
-    console.error(
-      "There has been a problem with your fetch (POST) operation:",
-      error
-    );
-  });
-}
-
 export function MapQuestions(config: QuestionProps) {
   const navigate = useNavigate();
-  const [questionApi, setQuestionApi] = useState<QuestionAnimals>();
-  const [isLoading, setIsLoading] = useState(false);
+  const { loading, error, data, reload } = useLoader(
+    async () => await fetchJSON("/api/question/random")
+  );
+  const question: QuestionAnimals | undefined = data;
 
-  // får spørsmål generert fra api kall
-  // GET
-  const getQuestion = async () => {
-    const response = await fetch("api/question/random");
-    const questionData = await response.json();
-    setQuestionApi(questionData);
-  };
-
-  // kaller på funksjon i useEffect, ellers fikk jeg TS error TS2345
-  // GET
-  useEffect(() => {
-    getQuestion().catch((error) => {
-      console.error("Error with fetch (GET) operation:", error);
-    });
-  }, []);
+  if (error) {
+    return (
+      <div className={"error-message"}>
+        An error occurred: {error.toString()}
+      </div>
+    );
+  }
 
   function checkAnswer(answer: string, id: number) {
     // POST
     postAnswerHTTP(answer, id);
-    console.log(answer, id);
+    /* console.log(answer, id); */
 
-    const result = isCorrectAnswer(questionApi, answer);
+    const result = isCorrectAnswer(question, answer);
     config.setQuestionsAnswered?.((q: number) => q + 1);
 
     if (result) {
@@ -101,21 +76,21 @@ export function MapQuestions(config: QuestionProps) {
     }
   }
 
-  if (!questionApi) return <h2>Loading...</h2>;
+  if (!question) return <h2>Loading...</h2>;
 
   return (
     <>
-      <h2>{questionApi.question}</h2>
+      <h2>{question.question}</h2>
       <div>
-        {Object.keys(questionApi.answers).map((answer: string) =>
-          questionApi.answers[answer] == null ? null : (
+        {Object.keys(question.answers).map((answer: string) =>
+          question.answers[answer] == null ? null : (
             <div key={answer} data-testid={answer}>
               <button
                 className={"button"}
                 name={"answer"}
-                onClick={() => checkAnswer(answer, questionApi.id)}
+                onClick={() => checkAnswer(answer, question.id)}
               >
-                {questionApi.answers[answer]}
+                {question.answers[answer]}
               </button>
             </div>
           )
