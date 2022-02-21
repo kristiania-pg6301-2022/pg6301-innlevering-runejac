@@ -38,5 +38,3 @@ export function postAnswerHTTP(answer: string, id: number) {
     );
   });
 }
-
-exports.fetchJSON = fetchJSON;

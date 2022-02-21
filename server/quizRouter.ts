@@ -40,7 +40,7 @@ QuizRouter.post(
     res: express.Response,
     _next: express.NextFunction
   ) => {
-    const { id, answers } = req.body;
+    /* const { id, answers } = req.body; */
     const question = Questions.find((q) => q.id === parseInt(req.body.id));
 
     if (!question) return res.status(404).send("POST request not found");

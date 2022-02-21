@@ -73,8 +73,6 @@ export function MapQuestions(props: QuestionProps) {
   );
   const question: QuestionAnimals | undefined = data;
 
-  console.log(question);
-
   if (error) {
     return (
       <div className={"error-message"}>
