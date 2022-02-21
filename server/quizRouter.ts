@@ -11,13 +11,25 @@ export const QuizRouter = express.Router();
 
 QuizRouter.get(
   "/question/random",
-  (req: express.Request, res: express.Response) => {
-    const question = randomQuestion();
+  (
+    req: express.Request,
+    res: express.Response,
+    _next: express.NextFunction
+  ) => {
+    //todo prøv her å få til at man ikke skal trenge å ha med correct_answers
+    const { question, id, answers, category, correct_answers } =
+      randomQuestion();
 
     if (!question) {
-      res.status(404).send("GET request not found");
+      res.status(404).send("GET request not found from quizRouter.ts line 22");
     }
-    res.json(question);
+    res.json({
+      question,
+      id,
+      answers,
+      category,
+      correct_answers,
+    });
   }
 );
 
@@ -28,6 +40,7 @@ QuizRouter.post(
     res: express.Response,
     _next: express.NextFunction
   ) => {
+    const { id, answers } = req.body;
     const question = Questions.find((q) => q.id === parseInt(req.body.id));
 
     if (!question) return res.status(404).send("POST request not found");

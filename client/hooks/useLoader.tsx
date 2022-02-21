@@ -8,13 +8,13 @@ export function useLoader(loadingFn: {
     | SetStateAction<QuestionAnimals | undefined>
     | PromiseLike<SetStateAction<QuestionAnimals | undefined>>;
 }) {
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState();
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<Error>();
   const [data, setData] = useState<QuestionAnimals>();
   // @ts-ignore
   useEffect(reload, []);
 
-  async function reload() {
+  async function reload(): Promise<void> {
     setLoading(true);
     setData(undefined);
     setError(undefined);
@@ -30,3 +30,5 @@ export function useLoader(loadingFn: {
 
   return { loading, error, data, reload };
 }
+
+exports.useLoader = useLoader;

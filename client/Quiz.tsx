@@ -29,12 +29,15 @@ interface QuestionProps {
   setCorrectAnswered?: Dispatch<SetStateAction<number>>;
 }
 
-export function FrontPage(config: QuestionProps) {
+export function FrontPage(props: QuestionProps) {
   return (
     <div>
       <h1 className={"correct-or-wrong-txt"}>Take a quiz</h1>
-      <h4 className={"correct-or-wrong-txt"} data-testid={"frontpage-status"}>
-        {config.correctAnswered} / {config.questionsAnswered} correct answered
+      <h4
+        className={"correct-or-wrong-txt"}
+        data-testid={"frontpage-score-status"}
+      >
+        {props.correctAnswered} / {props.questionsAnswered} correct answered
       </h4>
       <div>
         <Link className={"home"} to={"/question"}>
@@ -45,12 +48,32 @@ export function FrontPage(config: QuestionProps) {
   );
 }
 
-export function MapQuestions(config: QuestionProps) {
+export function Score(props: {
+  correctAnswered: number;
+  questionsAnswered: number;
+}) {
+  return (
+    <div>
+      <p data-testid={"score-status"}>
+        {props.correctAnswered} / {props.questionsAnswered} correct answered
+      </p>
+      <p>
+        <Link className={"home"} to={"/"}>
+          Home
+        </Link>
+      </p>
+    </div>
+  );
+}
+
+export function MapQuestions(props: QuestionProps) {
   const navigate = useNavigate();
   const { loading, error, data, reload } = useLoader(
     async () => await fetchJSON("/api/question/random")
   );
   const question: QuestionAnimals | undefined = data;
+
+  console.log(question);
 
   if (error) {
     return (
@@ -60,35 +83,35 @@ export function MapQuestions(config: QuestionProps) {
     );
   }
 
-  function checkAnswer(answer: string, id: number) {
+  function answerHandler(answer: string, id: number) {
     // POST
     postAnswerHTTP(answer, id);
     /* console.log(answer, id); */
 
     const result = isCorrectAnswer(question, answer);
-    config.setQuestionsAnswered?.((q: number) => q + 1);
+    props.setQuestionsAnswered?.((q: number) => q + 1);
 
     if (result) {
-      config.setCorrectAnswered?.((q: number) => q + 1);
+      props.setCorrectAnswered?.((q: number) => q + 1);
       navigate("/answer/correct");
     } else {
       navigate("/answer/wrong");
     }
   }
 
-  if (!question) return <h2>Loading...</h2>;
+  if (!question || loading) return <h2>Loading...</h2>;
 
   return (
     <>
       <h2>{question.question}</h2>
       <div>
         {Object.keys(question.answers).map((answer: string) =>
-          question.answers[answer] == null ? null : (
+          question?.answers[answer] == null ? null : (
             <div key={answer} data-testid={answer}>
               <button
                 className={"button"}
                 name={"answer"}
-                onClick={() => checkAnswer(answer, question.id)}
+                onClick={() => answerHandler(answer, question.id)}
               >
                 {question.answers[answer]}
               </button>
@@ -96,16 +119,10 @@ export function MapQuestions(config: QuestionProps) {
           )
         )}
       </div>
-      <div>
-        <p data-testid={"map-question-status"}>
-          {config.correctAnswered} / {config.questionsAnswered} correct answered
-        </p>
-        <p>
-          <Link className={"home"} to={"/"}>
-            Home
-          </Link>
-        </p>
-      </div>
+      <Score
+        correctAnswered={props.correctAnswered}
+        questionsAnswered={props.questionsAnswered}
+      />
     </>
   );
 }
