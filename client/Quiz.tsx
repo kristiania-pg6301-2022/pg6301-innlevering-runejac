@@ -19,17 +19,17 @@ import {
 } from "./quiestions-animals";
 import { fetchJSON, postAnswerHTTP } from "./api/http";
 import { useLoader } from "./hooks/useLoader";
+import * as stream from "stream";
 
 export const QuestionContext = createContext({ randomQuestion });
 
-interface QuestionProps {
-  readonly correctAnswered: number;
-  readonly questionsAnswered: number;
-  setQuestionsAnswered?: Dispatch<SetStateAction<number>>;
-  setCorrectAnswered?: Dispatch<SetStateAction<number>>;
+interface ScoreProps {
+  answered: number;
+  correct: number;
+  reload: any;
 }
 
-export function FrontPage(props: QuestionProps) {
+export function FrontPage(props: ScoreProps) {
   return (
     <div>
       <h1 className={"correct-or-wrong-txt"}>Take a quiz</h1>
@@ -37,7 +37,7 @@ export function FrontPage(props: QuestionProps) {
         className={"correct-or-wrong-txt"}
         data-testid={"frontpage-score-status"}
       >
-        {props.correctAnswered} / {props.questionsAnswered} correct answered
+        {props.correct} / {props.answered} correct answered
       </h4>
       <div>
         <Link className={"home"} to={"/question"}>
@@ -48,14 +48,11 @@ export function FrontPage(props: QuestionProps) {
   );
 }
 
-export function Score(props: {
-  correctAnswered: number;
-  questionsAnswered: number;
-}) {
+export function Score(props: ScoreProps) {
   return (
     <div>
       <p data-testid={"score-status"}>
-        {props.correctAnswered} / {props.questionsAnswered} correct answered
+        {props.correct} / {props.answered} correct answered
       </p>
       <p>
         <Link className={"home"} to={"/"}>
@@ -66,7 +63,7 @@ export function Score(props: {
   );
 }
 
-export function MapQuestions(props: QuestionProps) {
+export function MapQuestions(props: ScoreProps) {
   const navigate = useNavigate();
   const { loading, error, data, reload } = useLoader(
     async () => await fetchJSON("/api/question/random")
@@ -83,18 +80,14 @@ export function MapQuestions(props: QuestionProps) {
 
   function answerHandler(answer: string, id: number) {
     // POST
-    postAnswerHTTP(answer, id);
-    /* console.log(answer, id); */
-
-    const result = isCorrectAnswer(question, answer);
-    props.setQuestionsAnswered?.((q: number) => q + 1);
-
-    if (result) {
-      props.setCorrectAnswered?.((q: number) => q + 1);
-      navigate("/answer/correct");
-    } else {
-      navigate("/answer/wrong");
-    }
+    postAnswerHTTP(answer, id).then((data) => {
+      props.reload();
+      if (data.isCorrect === true) {
+        navigate("/answer/correct");
+      } else {
+        navigate("/answer/wrong");
+      }
+    });
   }
 
   if (!question || loading) return <h2>Loading...</h2>;
@@ -118,8 +111,9 @@ export function MapQuestions(props: QuestionProps) {
         )}
       </div>
       <Score
-        correctAnswered={props.correctAnswered}
-        questionsAnswered={props.questionsAnswered}
+        correct={props.correct}
+        answered={props.answered}
+        reload={props.reload}
       />
     </>
   );
@@ -155,29 +149,25 @@ export const ShowAnswer = () => {
 };
 
 const Quiz = () => {
-  const [questionAnswered, setQuestionAnswered] = useState(0);
-  const [correctAnswered, setCorrectAnswered] = useState(0);
+  const { loading, error, data, reload } = useLoader(
+    async () => await fetchJSON("/api/question/score")
+  );
+
+  const correct = Number(data.correct);
+  const answered = Number(data.answers);
 
   return (
     <Routes>
       <Route
         path={"/"}
         element={
-          <FrontPage
-            questionsAnswered={questionAnswered}
-            correctAnswered={correctAnswered}
-          />
+          <FrontPage correct={correct} answered={answered} reload={reload} />
         }
       />
       <Route
         path={"/question"}
         element={
-          <MapQuestions
-            setQuestionsAnswered={setQuestionAnswered}
-            setCorrectAnswered={setCorrectAnswered}
-            questionsAnswered={questionAnswered}
-            correctAnswered={correctAnswered}
-          />
+          <MapQuestions correct={correct} answered={answered} reload={reload} />
         }
       />
       <Route path={"/answer/*"} element={<ShowAnswer />} />

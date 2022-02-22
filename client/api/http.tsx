@@ -20,9 +20,9 @@ export async function fetchJSON(url: RequestInfo) {
 }
 
 // POST request
-export function postAnswerHTTP(answer: string, id: number) {
+export async function postAnswerHTTP(answer: string, id: number) {
   // todo forsøker noe i test med å mocke denne funksjonen
-  fetch("api/question/answer", {
+  const response = await fetch("api/question/answer", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -31,10 +31,6 @@ export function postAnswerHTTP(answer: string, id: number) {
       answer,
       id,
     }),
-  }).catch((error) => {
-    console.error(
-      "There has been a problem with your fetch (POST) operation, coming from http.tsx:",
-      error
-    );
   });
+  return response.json();
 }
