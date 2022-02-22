@@ -152,8 +152,10 @@ const Quiz = () => {
     async () => await fetchJSON("/api/question/score")
   );
 
-  const correct = Number(data.correct);
-  const answered = Number(data.answers);
+  // måtte ha ? her fordi jeg fikk
+  // "TypeError: Cannot read properties of undefined (reading 'correct')"
+  const correct = Number(data?.correct);
+  const answered = Number(data?.answers);
 
   return (
     <Routes>
