@@ -17,10 +17,10 @@ QuizRouter.get(
       ? JSON.parse(req.signedCookies.score)
       : { answers: 0, correct: 0 };
 
-    // kan skrive bare "score" her og
     res.send({
       answers: score.answers,
       correct: score.correct,
+      // kan skrive bare "score" her og
     });
   }
 );

@@ -81,7 +81,7 @@ export function MapQuestions(props: ScoreProps) {
     // POST
     postAnswerHTTP(answer, id).then((answerSent) => {
       props.reload();
-      // får reload fra score api kallet
+      // for å refreshe "score" så brukes reload fra /api/question/score- kallet
       if (answerSent.isCorrect) {
         navigate("/answer/correct");
       } else {

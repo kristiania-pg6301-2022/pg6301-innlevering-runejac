@@ -6,12 +6,14 @@
 
 https://innlevering-quiz-runejac.herokuapp.com/
 
-* [x] lag client siden
-* [x] lag tester for client
-* [x] Github actions
-* [x] coveralls io
-* [x] GET request for questions
-* [x] POST request for answers
-* [x] lag server siden
+* [x] client side
+* [x] server side
+* [x] Coveralls io
+* [x] GET questions
+* [x] POST answers
+* [x] GET score
 * [x] deploy til Heroku
-* [ ] lag tester for server
+* [ ] tester for server
+* [ ] tester for client
+* [ ] github actions (🟢)
+* [ ] itsDone(ok: Chill)
