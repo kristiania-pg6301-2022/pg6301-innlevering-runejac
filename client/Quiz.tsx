@@ -25,7 +25,7 @@ export const QuestionContext = createContext({ randomQuestion });
 interface ScoreProps {
   answered: number;
   correct: number;
-  reload: any;
+  reload?: any;
 }
 
 export function FrontPage(props: ScoreProps) {
@@ -79,9 +79,10 @@ export function MapQuestions(props: ScoreProps) {
 
   function answerHandler(answer: string, id: number) {
     // POST
-    postAnswerHTTP(answer, id).then((data) => {
+    postAnswerHTTP(answer, id).then((answerSent) => {
       props.reload();
-      if (data.isCorrect === true) {
+      // får reload fra score api kallet
+      if (answerSent.isCorrect) {
         navigate("/answer/correct");
       } else {
         navigate("/answer/wrong");
@@ -161,9 +162,7 @@ const Quiz = () => {
     <Routes>
       <Route
         path={"/"}
-        element={
-          <FrontPage correct={correct} answered={answered} reload={reload} />
-        }
+        element={<FrontPage correct={correct} answered={answered} />}
       />
       <Route
         path={"/question"}
