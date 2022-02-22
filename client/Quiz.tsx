@@ -19,7 +19,6 @@ import {
 } from "./quiestions-animals";
 import { fetchJSON, postAnswerHTTP } from "./api/http";
 import { useLoader } from "./hooks/useLoader";
-import * as stream from "stream";
 
 export const QuestionContext = createContext({ randomQuestion });
 
