@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
-import { QuestionAnimals } from "./quiestions-animals";
+import { QuestionAnimals } from "./questions-animals";
 import { getJSON, postJSON } from "./api/http";
 import { useLoader } from "./hooks/useLoader";
 

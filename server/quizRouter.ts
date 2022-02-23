@@ -3,7 +3,7 @@ import {
   isCorrectAnswer,
   Questions,
   randomQuestion,
-} from "../client/quiestions-animals";
+} from "../client/questions-animals";
 
 export const QuizRouter = express.Router();
 

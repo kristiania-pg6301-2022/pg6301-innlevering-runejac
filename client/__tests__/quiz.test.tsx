@@ -4,7 +4,7 @@ import { render, unmountComponentAtNode } from "react-dom";
 import { MemoryRouter } from "react-router-dom";
 import { act, Simulate } from "react-dom/test-utils";
 import "regenerator-runtime/runtime";
-import { QuestionAnimals, randomQuestion } from "../quiestions-animals";
+import { QuestionAnimals, randomQuestion } from "../questions-animals";
 import { useLoader } from "../hooks/useLoader";
 import { getJSON } from "../api/http";
 import Mock = jest.Mock;

@@ -1,5 +1,5 @@
 import { SetStateAction, useEffect, useState } from "react";
-import { QuestionAnimals } from "../quiestions-animals";
+import { QuestionAnimals } from "../questions-animals";
 
 // hook from class
 export function useLoader(loadingFn: {

@@ -24,4 +24,3 @@ jobs:
         with:
           path-to-lcov: coverage/lcov.info
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          repo_token: 4YyNh06SOUQLBQ6g7fDIT8sMrGOIol0FG
