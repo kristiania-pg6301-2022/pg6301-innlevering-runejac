@@ -6,7 +6,7 @@ import { act, Simulate } from "react-dom/test-utils";
 import "regenerator-runtime/runtime";
 import { QuestionAnimals, randomQuestion } from "../quiestions-animals";
 import { useLoader } from "../hooks/useLoader";
-import { fetchJSON } from "../api/http";
+import { getJSON } from "../api/http";
 import Mock = jest.Mock;
 import { QuestionContext } from "../contexts/context";
 
@@ -100,9 +100,7 @@ describe("quiz pages", () => {
     const correct: Mock<number> = jest.fn();
     const reload = jest.fn();
 
-    jest.mock("../contexts/context", () => ({
-      // todo et eller annet her
-    }));
+    jest.mock("../contexts/context", () => ({}));
 
     await act(async () => {
       render(
@@ -111,7 +109,7 @@ describe("quiz pages", () => {
             <MapQuestions
               correct={correct}
               answered={answered}
-              reload={reload}
+              reloadScore={reload}
             />
           </QuestionContext.Provider>
         </MemoryRouter>,
@@ -144,7 +142,7 @@ describe("quiz pages", () => {
             <MapQuestions
               correct={correct}
               answered={answered}
-              reload={reload}
+              reloadScore={reload}
             />
           </QuestionContext.Provider>
         </MemoryRouter>,

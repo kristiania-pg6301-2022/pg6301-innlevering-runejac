@@ -1,13 +1,13 @@
 import React from "react";
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import { QuestionAnimals } from "./quiestions-animals";
-import { fetchJSON, postAnswerHTTP } from "./api/http";
+import { getJSON, postJSON } from "./api/http";
 import { useLoader } from "./hooks/useLoader";
 
 interface ScoreProps {
   answered: number | any;
   correct: number | any;
-  reload?: any;
+  reloadScore?: any;
 }
 
 export function FrontPage(props: ScoreProps) {
@@ -46,10 +46,12 @@ export function Score(props: ScoreProps) {
 
 export function MapQuestions(props: ScoreProps) {
   const navigate = useNavigate();
-  const { loading, error, data, reload } = useLoader(
-    async () => await fetchJSON("/api/question/random")
-  );
-  const question: QuestionAnimals | undefined = data;
+  const {
+    loading,
+    error,
+    data: question,
+    reload: reloadQuestions,
+  } = useLoader(async () => await getJSON("/api/question/random"));
 
   if (error) {
     return (
@@ -61,8 +63,11 @@ export function MapQuestions(props: ScoreProps) {
 
   function answerHandler(answer: string, id: number) {
     // POST
-    postAnswerHTTP(answer, id).then((answerSent) => {
-      props.reload();
+    postJSON("/api/question/answer", {
+      answer,
+      id,
+    }).then((answerSent) => {
+      props.reloadScore();
       // for å refreshe "score" så brukes reload fra /api/question/score- kallet
       if (answerSent.isCorrect) {
         navigate("/answer/correct");
@@ -95,7 +100,7 @@ export function MapQuestions(props: ScoreProps) {
       <Score
         correct={props.correct}
         answered={props.answered}
-        reload={props.reload}
+        reloadScore={props.reloadScore}
       />
     </>
   );
@@ -131,14 +136,17 @@ export const ShowAnswer = () => {
 };
 
 const Quiz = () => {
-  const { loading, error, data, reload } = useLoader(
-    async () => await fetchJSON("/api/question/score")
-  );
+  const {
+    loading,
+    error,
+    data: score,
+    reload: reloadScore,
+  } = useLoader(async () => await getJSON("/api/question/score"));
 
   // måtte ha ? her fordi jeg fikk
   // "TypeError: Cannot read properties of undefined (reading 'correct')"
-  const correct = Number(data?.correct);
-  const answered = Number(data?.answers);
+  const correct = Number(score?.correct);
+  const answered = Number(score?.answers);
 
   return (
     <Routes>
@@ -149,7 +157,11 @@ const Quiz = () => {
       <Route
         path={"/question"}
         element={
-          <MapQuestions correct={correct} answered={answered} reload={reload} />
+          <MapQuestions
+            correct={correct}
+            answered={answered}
+            reloadScore={reloadScore}
+          />
         }
       />
       <Route path={"/answer/*"} element={<ShowAnswer />} />

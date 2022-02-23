@@ -10,7 +10,7 @@ export function useLoader(loadingFn: {
 }) {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error>();
-  const [data, setData] = useState<any>();
+  const [data, setData] = useState<QuestionAnimals | undefined | any>();
   // kan sette <QuestionAnimals> her i stedet for <any>, men setter <any> ellers får
   // jeg rød line på 156 i Quiz.tsx, for .correct finnes ikke i interfacet,
   // men når den kompilerer fanger

@@ -6,9 +6,9 @@ export class HttpError extends Error {
   }
 }
 
-// only for GET requests so far (I think)
-export async function fetchJSON(url: RequestInfo) {
-  const res = await fetch(url);
+// GET request
+export async function getJSON(apiUrl: RequestInfo) {
+  const res = await fetch(apiUrl);
 
   if (res.status === 204) {
     return null;
@@ -19,18 +19,16 @@ export async function fetchJSON(url: RequestInfo) {
   }
 }
 
-// POST request
-export async function postAnswerHTTP(answer: string, id: number) {
-  // todo forsøker noe i test med å mocke denne funksjonen
-  const response = await fetch("api/question/answer", {
+// POST request, må ha med method, headers og body
+export async function postJSON(apiUrl: RequestInfo, json: RequestInit | any) {
+  const response = await fetch(apiUrl, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-      answer,
-      id,
-    }),
+    body: JSON.stringify(json),
   });
+  // fordi jeg skal gjøre noe med svaret returnerer jeg responsen så den kan brukes
+  // til å sjekke om svar er rett eller galt og kunne brukes i navigate hook-en
   return response.json();
 }
