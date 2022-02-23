@@ -4,4 +4,8 @@ exports[`quiz pages At FrontPage: Should test questions answered and correct ans
 
 exports[`quiz pages At Score: Should test questions answered and correct answered 1`] = `"<div><p data-testid=\\"score-status\\">4 / 5 correct answered</p><p><a class=\\"home\\" href=\\"/\\">Home</a></p></div>"`;
 
-exports[`quiz pages Should only test startpage 1`] = `"<div><h1 class=\\"correct-or-wrong-txt\\">Take a quiz</h1><h4 class=\\"correct-or-wrong-txt\\" data-testid=\\"frontpage-score-status\\">0 / 0 correct answered</h4><div><a class=\\"home\\" href=\\"/question\\">New quiz</a></div></div>"`;
+exports[`quiz pages Should only render startpage 1`] = `"<div><h1 class=\\"correct-or-wrong-txt\\">Take a quiz</h1><h4 class=\\"correct-or-wrong-txt\\" data-testid=\\"frontpage-score-status\\">NaN / NaN correct answered</h4><div><a class=\\"home\\" href=\\"/question\\">New quiz</a></div></div>"`;
+
+exports[`quiz pages Should only test startpage 1`] = `"<div><h1 class=\\"correct-or-wrong-txt\\">Take a quiz</h1><h4 class=\\"correct-or-wrong-txt\\" data-testid=\\"frontpage-score-status\\">NaN / NaN correct answered</h4><div><a class=\\"home\\" href=\\"/question\\">New quiz</a></div></div>"`;
+
+exports[`quiz pages should register correct answer with simulate click 1`] = `"<div class=\\"error-message\\">An error occurred: ReferenceError: fetch is not defined</div>"`;

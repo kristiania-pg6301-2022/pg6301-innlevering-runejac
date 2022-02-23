@@ -97,7 +97,9 @@
       "!dist/**",
       "!babel.config.js",
       "!client/index.tsx",
-      "!config/**"
+      "!config/**",
+      "!d.ts",
+      "!client/questions.ts"
     ]
   },
   "engines": {

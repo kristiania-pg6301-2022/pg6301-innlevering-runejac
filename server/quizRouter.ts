@@ -1,9 +1,6 @@
-import express from "express";
-// todo husk å endre dette til rett avhengig av hvilken api du bruker
-/* import { Questions randomQuestion } from "../client/questions"; */
+import express, { NextFunction } from "express";
 import {
   isCorrectAnswer,
-  QuestionAnimals,
   Questions,
   randomQuestion,
 } from "../client/quiestions-animals";
@@ -20,7 +17,7 @@ QuizRouter.get(
     res.send({
       answers: score.answers,
       correct: score.correct,
-      // kan skrive bare "score" her og
+      // kan og skrive "score" her og, men syns det er mer tydelig
     });
   }
 );
@@ -32,7 +29,6 @@ QuizRouter.get(
     res: express.Response,
     _next: express.NextFunction
   ) => {
-    //todo prøv her å få til at man ikke skal trenge å ha med correct_answers
     const { question, id, answers, category } = randomQuestion();
 
     if (!question) {
@@ -73,5 +69,21 @@ QuizRouter.post(
     res.json({
       isCorrect,
     });
+  }
+);
+
+QuizRouter.get(
+  // kun for test hensikt
+  "/helloworld",
+  function (_req: express.Request, res: express.Response, _next: NextFunction) {
+    res.send("Hello world");
+  }
+);
+
+QuizRouter.get(
+  // kun for test hensikt
+  "/*",
+  function (_req: express.Request, res: express.Response, _next: NextFunction) {
+    res.sendStatus(404);
   }
 );

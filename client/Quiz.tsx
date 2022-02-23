@@ -1,30 +1,12 @@
-import React, {
-  createContext,
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useState,
-} from "react";
+import React from "react";
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
-/* import {
-  isCorrectAnswer,
-  Question,
-  Questions,
-  randomQuestion,
-} from "./questions"; */
-import {
-  isCorrectAnswer,
-  QuestionAnimals,
-  randomQuestion,
-} from "./quiestions-animals";
+import { QuestionAnimals } from "./quiestions-animals";
 import { fetchJSON, postAnswerHTTP } from "./api/http";
 import { useLoader } from "./hooks/useLoader";
 
-export const QuestionContext = createContext({ randomQuestion });
-
 interface ScoreProps {
-  answered: number;
-  correct: number;
+  answered: number | any;
+  correct: number | any;
   reload?: any;
 }
 

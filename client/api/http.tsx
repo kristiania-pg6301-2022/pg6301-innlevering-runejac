@@ -7,7 +7,7 @@ export class HttpError extends Error {
 }
 
 // only for GET requests so far (I think)
-export async function fetchJSON(url: RequestInfo, post: boolean = true) {
+export async function fetchJSON(url: RequestInfo) {
   const res = await fetch(url);
 
   if (res.status === 204) {
