@@ -4,13 +4,14 @@ import { QuestionAnimals } from "./questions-animals";
 import { getJSON, postJSON } from "./api/http";
 import { useLoader } from "./hooks/useLoader";
 
-interface ScoreProps {
+interface QuestionProps {
   answered: number | any;
   correct: number | any;
   reloadScore?: any;
+  questionApi?: any | { questions: () => Promise<any> } | Promise<any>;
 }
 
-export function FrontPage(props: ScoreProps) {
+export function FrontPage(props: QuestionProps) {
   return (
     <div>
       <h1 className={"correct-or-wrong-txt"}>Take a quiz</h1>
@@ -29,7 +30,7 @@ export function FrontPage(props: ScoreProps) {
   );
 }
 
-export function Score(props: ScoreProps) {
+export function Score(props: QuestionProps) {
   return (
     <div>
       <p data-testid={"score-status"}>
@@ -43,15 +44,14 @@ export function Score(props: ScoreProps) {
     </div>
   );
 }
-
-export function MapQuestions(props: ScoreProps) {
+export function MapQuestions(props: QuestionProps) {
   const navigate = useNavigate();
   const {
     loading,
     error,
     data: question,
     reload: reloadQuestions,
-  } = useLoader(async () => await getJSON("/api/question/random"));
+  } = useLoader(props.questionApi);
 
   if (error) {
     return (
@@ -135,13 +135,18 @@ export const ShowAnswer = () => {
   );
 };
 
-const Quiz = () => {
+const getApis = {
+  questionApi: async () => await getJSON("/api/question/random"),
+  scoreApi: async () => await getJSON("/api/question/score"),
+};
+
+function Quiz() {
   const {
     loading,
     error,
     data: score,
     reload: reloadScore,
-  } = useLoader(async () => await getJSON("/api/question/score"));
+  } = useLoader(getApis.scoreApi);
 
   // måtte ha ? her fordi jeg fikk
   // "TypeError: Cannot read properties of undefined (reading 'correct')"
@@ -161,6 +166,7 @@ const Quiz = () => {
             correct={correct}
             answered={answered}
             reloadScore={reloadScore}
+            questionApi={getApis.questionApi}
           />
         }
       />
@@ -168,6 +174,6 @@ const Quiz = () => {
       <Route path={"*"} element={<h1>Not found</h1>} />
     </Routes>
   );
-};
+}
 
 export default Quiz;

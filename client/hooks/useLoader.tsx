@@ -9,7 +9,7 @@ export function useLoader(loadingFn: {
     | PromiseLike<SetStateAction<QuestionAnimals | undefined>>;
 }) {
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<Error>();
+  const [error, setError] = useState<Error | undefined>();
   const [data, setData] = useState<QuestionAnimals | undefined | any>();
   // kan sette <QuestionAnimals> her i stedet for <any>, men setter <any> ellers får
   // jeg rød line på 156 i Quiz.tsx, for .correct finnes ikke i interfacet,
