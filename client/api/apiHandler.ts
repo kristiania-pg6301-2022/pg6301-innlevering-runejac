@@ -1,12 +1,6 @@
-export class HttpError extends Error {
-  constructor(status: number, statusText: string) {
-    super("Exception from http.tsx:" + statusText);
-    // @ts-ignore
-    this.status = status;
-  }
-}
-
 // GET request
+import { HttpError } from "./http";
+
 export async function getJSON(apiUrl: RequestInfo) {
   const res = await fetch(apiUrl);
 
@@ -21,7 +15,7 @@ export async function getJSON(apiUrl: RequestInfo) {
 
 // POST request, må ha med method, headers og body
 export async function postJSON(apiUrl: RequestInfo, json: RequestInit | any) {
-  const response = await fetch(apiUrl, {
+  const res = await fetch(apiUrl, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -30,5 +24,5 @@ export async function postJSON(apiUrl: RequestInfo, json: RequestInit | any) {
   });
   // fordi jeg skal gjøre noe med svaret returnerer jeg responsen så den kan brukes
   // til å sjekke om svar er rett eller galt og kunne brukes i navigate hook-en
-  return response.json();
+  return res.json();
 }

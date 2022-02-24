@@ -1,15 +1,14 @@
 import React from "react";
-import Quiz, { FrontPage, MapQuestions, Score } from "../Quiz";
+import Quiz, { MapQuestions } from "../Quiz";
 import { render, unmountComponentAtNode } from "react-dom";
 import { MemoryRouter } from "react-router-dom";
 import { act, Simulate } from "react-dom/test-utils";
 import "regenerator-runtime/runtime";
-import { QuestionAnimals, randomQuestion } from "../questions-animals";
-import { useLoader } from "../hooks/useLoader";
-import { getJSON } from "../api/http";
 import Mock = jest.Mock;
 import { QuestionContext } from "../contexts/context";
 import fetch from "node-fetch";
+import { FrontPage } from "../components/FrontPage";
+import { Score } from "../components/Score";
 
 describe("quiz pages", () => {
   let container: HTMLDivElement;
@@ -98,33 +97,35 @@ describe("quiz pages", () => {
   });
 
   it("should register correct answer with simulate click", async function () {
-    const answered: Mock<number> = await jest.fn();
-    const correct: Mock<number> = await jest.fn();
-    const reload = await jest.fn();
+    /* const answered: Mock<number> = await jest.fn();
+    const correct: Mock<number> = await jest.fn(); */
+    const reload = jest.fn();
+    const postAnswer = jest.fn();
 
     await act(async () => {
       render(
         <MemoryRouter initialEntries={["/question"]}>
           <MapQuestions
-            correct={correct}
-            answered={answered}
+            correct={1}
+            answered={1}
             reloadScore={reload}
             questionApi={questionApi}
+            postAnswer={postAnswer}
           />
         </MemoryRouter>,
         container
       );
     });
 
-    /*     await act(async () => {
+    await act(async () => {
       Simulate.click(container.querySelector("[data-testid=answer_b] button")!);
     });
-    expect(answered).toBeCalled();
-    expect(correct).toBeCalled(); */
+    expect(reload).toBeCalled();
+    expect(postAnswer).toBeCalled();
     expect(container.innerHTML).toMatchSnapshot();
-    /*     expect(
+    expect(
       container.querySelector("[data-testid=score-status]")?.textContent
-    ).toEqual("1 / 1 correct answered");*/
+    ).toEqual("1 / 1 correct answered");
   });
 
   it("should register wrong answer with simulate click", async function () {

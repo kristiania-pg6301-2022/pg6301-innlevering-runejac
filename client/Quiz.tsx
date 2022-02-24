@@ -1,49 +1,20 @@
 import React from "react";
-import { Link, Route, Routes, useNavigate } from "react-router-dom";
-import { QuestionAnimals } from "./questions-animals";
-import { getJSON, postJSON } from "./api/http";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { useLoader } from "./hooks/useLoader";
+import { FrontPage } from "./components/FrontPage";
+import { Score } from "./components/Score";
+import { ShowAnswer } from "./components/ShowAnswer";
+import { postJSON } from "./api/apiHandler";
+import { getApis } from "./api/getApis";
 
-interface QuestionProps {
+export interface QuestionProps {
   answered: number | any;
   correct: number | any;
   reloadScore?: any;
   questionApi?: any | { questions: () => Promise<any> } | Promise<any>;
+  postAnswer?: any;
 }
 
-export function FrontPage(props: QuestionProps) {
-  return (
-    <div>
-      <h1 className={"correct-or-wrong-txt"}>Take a quiz</h1>
-      <h4
-        className={"correct-or-wrong-txt"}
-        data-testid={"frontpage-score-status"}
-      >
-        {props.correct} / {props.answered} correct answered
-      </h4>
-      <div>
-        <Link className={"home"} to={"/question"}>
-          New quiz
-        </Link>
-      </div>
-    </div>
-  );
-}
-
-export function Score(props: QuestionProps) {
-  return (
-    <div>
-      <p data-testid={"score-status"}>
-        {props.correct} / {props.answered} correct answered
-      </p>
-      <p>
-        <Link className={"home"} to={"/"}>
-          Home
-        </Link>
-      </p>
-    </div>
-  );
-}
 export function MapQuestions(props: QuestionProps) {
   const navigate = useNavigate();
   const {
@@ -53,28 +24,23 @@ export function MapQuestions(props: QuestionProps) {
     reload: reloadQuestions,
   } = useLoader(props.questionApi);
 
+  async function answerHandler(answer: string, id: number) {
+    const isCorrect = await props.postAnswer(answer, id);
+    props.reloadScore();
+    // for å refreshe "score" så brukes reload fra /api/question/score- kallet
+    if (isCorrect) {
+      navigate("/answer/correct");
+    } else {
+      navigate("/answer/wrong");
+    }
+  }
+
   if (error) {
     return (
       <div className={"error-message"}>
         An error occurred: {error.toString()}
       </div>
     );
-  }
-
-  function answerHandler(answer: string, id: number) {
-    // POST
-    postJSON("/api/question/answer", {
-      answer,
-      id,
-    }).then((answerSent) => {
-      props.reloadScore();
-      // for å refreshe "score" så brukes reload fra /api/question/score- kallet
-      if (answerSent.isCorrect) {
-        navigate("/answer/correct");
-      } else {
-        navigate("/answer/wrong");
-      }
-    });
   }
 
   if (!question || loading) return <h2>Loading...</h2>;
@@ -106,40 +72,6 @@ export function MapQuestions(props: QuestionProps) {
   );
 }
 
-export const ShowAnswer = () => {
-  return (
-    <div className={"show-answer-div"}>
-      <Routes>
-        <Route
-          path={"correct"}
-          element={<h1 className={"correct-or-wrong-txt"}>✅ Correct!</h1>}
-        />
-        <Route
-          path={"wrong"}
-          element={<h1 className={"correct-or-wrong-txt"}>❌ Wrong</h1>}
-        />
-      </Routes>
-      <ul className={"ul"}>
-        <li>
-          <Link className={"home"} to={"/question"}>
-            More questions
-          </Link>
-        </li>
-        <li>
-          <Link className={"home"} to={"/"}>
-            Home
-          </Link>
-        </li>
-      </ul>
-    </div>
-  );
-};
-
-const getApis = {
-  questionApi: async () => await getJSON("/api/question/random"),
-  scoreApi: async () => await getJSON("/api/question/score"),
-};
-
 function Quiz() {
   const {
     loading,
@@ -167,6 +99,7 @@ function Quiz() {
             answered={answered}
             reloadScore={reloadScore}
             questionApi={getApis.questionApi}
+            postAnswer={getApis.postAnswer}
           />
         }
       />
