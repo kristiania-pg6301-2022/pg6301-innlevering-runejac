@@ -10,7 +10,7 @@ export function FrontPage(props: QuestionProps) {
         className={"correct-or-wrong-txt"}
         data-testid={"frontpage-score-status"}
       >
-        {props.correct} / {props.answered} correct answered{" "}
+        {props.correct} / {props.answered} correct answered
       </h4>
       <div>
         <Link className={"home"} to={"/question"}>
