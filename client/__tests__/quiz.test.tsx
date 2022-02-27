@@ -9,6 +9,7 @@ import { QuestionContext } from "../contexts/context";
 import fetch from "node-fetch";
 import { FrontPage } from "../components/FrontPage";
 import { Score } from "../components/Score";
+import { randomQuestion } from "../questions-animals";
 
 describe("quiz pages", () => {
   let container: HTMLDivElement;
@@ -51,11 +52,12 @@ describe("quiz pages", () => {
   afterEach(async () => {
     // cleanup on exiting
     unmountComponentAtNode(await container);
+    jest.fn().mockClear();
   });
 
   /**-------------------------------------------------------------------------------------**/
 
-  it("Should only render startpage", async function () {
+  it("should only render startpage", async function () {
     await act(async () => {
       await render(
         <MemoryRouter>
@@ -68,7 +70,7 @@ describe("quiz pages", () => {
   });
 
   // sjekker Score komponent, sender antall rette og totalt spm besvart
-  it("At Score: Should test questions answered and correct answered", function () {
+  it("at Score: Should test questions answered and correct answered", function () {
     render(
       <MemoryRouter>
         <Score correct={4} answered={5} />
@@ -82,7 +84,7 @@ describe("quiz pages", () => {
     expect(container.innerHTML).toMatchSnapshot();
   });
 
-  it("At FrontPage: Should test questions answered and correct answered", function () {
+  it("at FrontPage: Should test questions answered and correct answered", function () {
     render(
       <MemoryRouter>
         <FrontPage correct={4} answered={5} />
@@ -96,15 +98,35 @@ describe("quiz pages", () => {
     expect(container.innerHTML).toMatchSnapshot();
   });
 
+  it("should render a question and its answer options", async function () {
+    const answered = jest.fn().mockReturnValue(0);
+    const correct = jest.fn().mockReturnValue(0);
+    // TODO her må du gjøre deg DONE angående score osv
+
+    await act(async () => {
+      render(
+        <MemoryRouter initialEntries={["/question"]}>
+          <MapQuestions
+            answered={answered()}
+            correct={correct()}
+            questionApi={questionApi}
+          />
+        </MemoryRouter>,
+        container
+      );
+    });
+    expect(container.innerHTML).toMatchSnapshot();
+    expect(questionApi).toBeDefined();
+    expect(answered).toBeCalled();
+    expect(correct).toBeCalled();
+  });
+
   it("should register correct answer with simulate click", async function () {
-    /* const answered: Mock<number> = await jest.fn();
-    const correct: Mock<number> = await jest.fn(); */
     const reload = jest.fn();
-    const postAnswer = jest.fn();
-    let correct = 0;
-    correct += 1;
-    let answered = 0;
-    answered += 1;
+    const postAnswer = jest.fn().mockImplementation(randomQuestion);
+    const answered = (x: number) => x + 1;
+    const correct = (x: number) => x + 1;
+    // TODO her må du gjøre deg DONE angående score osv
 
     await act(async () => {
       render(
@@ -114,7 +136,7 @@ describe("quiz pages", () => {
             answered={answered}
             reloadScore={reload}
             questionApi={questionApi}
-            postAnswer={postAnswer}
+            postAnswerApi={postAnswer}
           />
         </MemoryRouter>,
         container
@@ -129,7 +151,7 @@ describe("quiz pages", () => {
     expect(container.innerHTML).toMatchSnapshot();
     expect(
       container.querySelector("[data-testid=score-status]")?.textContent
-    ).toEqual("1 / 1 correct answered");
+    ).toEqual(`1 / 1 correct answered`);
   });
 
   it("should register wrong answer with simulate click", async function () {
@@ -144,7 +166,7 @@ describe("quiz pages", () => {
             answered={1}
             reloadScore={reload}
             questionApi={questionApi}
-            postAnswer={postAnswer}
+            postAnswerApi={postAnswer}
           />
         </MemoryRouter>,
         container

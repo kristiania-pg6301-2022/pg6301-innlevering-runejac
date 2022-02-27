@@ -28,6 +28,7 @@ export function useLoader(loadingFn: {
       setLoading(false);
     }
   }
+
   // @ts-ignore
   useEffect(reload, []);
 

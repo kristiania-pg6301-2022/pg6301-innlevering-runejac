@@ -4,7 +4,6 @@ import { useLoader } from "./hooks/useLoader";
 import { FrontPage } from "./components/FrontPage";
 import { Score } from "./components/Score";
 import { ShowAnswer } from "./components/ShowAnswer";
-import { postJSON } from "./api/apiHandler";
 import { getApis } from "./api/getApis";
 
 export interface QuestionProps {
@@ -12,7 +11,7 @@ export interface QuestionProps {
   correct: number | any;
   reloadScore?: any;
   questionApi?: any | { questions: () => Promise<any> } | Promise<any>;
-  postAnswer?: any;
+  postAnswerApi?: any;
 }
 
 export function MapQuestions(props: QuestionProps) {
@@ -25,10 +24,14 @@ export function MapQuestions(props: QuestionProps) {
   } = useLoader(props.questionApi);
 
   async function answerHandler(answer: string, id: number) {
-    const isCorrect = await props.postAnswer(answer, id);
+    const answerSent: { isCorrect: boolean } = await props.postAnswerApi(
+      answer,
+      id
+    );
+
     props.reloadScore();
     // for å refreshe "score" så brukes reload fra /api/question/score- kallet
-    if (isCorrect) {
+    if (answerSent.isCorrect) {
       navigate("/answer/correct");
     } else {
       navigate("/answer/wrong");
@@ -99,7 +102,7 @@ function Quiz() {
             answered={answered}
             reloadScore={reloadScore}
             questionApi={getApis.questionApi}
-            postAnswer={getApis.postAnswer}
+            postAnswerApi={getApis.postAnswerApi}
           />
         }
       />
