@@ -79,11 +79,8 @@ export function MapQuestions(props: QuestionProps) {
 function Quiz() {
   const { data: score, reload: reloadScore } = useLoader(getApis.scoreApi);
 
-  // måtte ha ? her fordi jeg fikk
-  // "TypeError: Cannot read properties of undefined (reading 'correct')"
-  // FIXME 28.02 kl. 18:44 fjerner "?" her, GHA klager på de ser det ut som
-  const correct: number = score.correct;
-  const answered: number = score.answers;
+  const correct: number = score?.correct;
+  const answered: number = score?.answers;
 
   return (
     <Routes>
