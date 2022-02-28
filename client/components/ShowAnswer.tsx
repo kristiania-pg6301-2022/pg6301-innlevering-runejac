@@ -7,11 +7,11 @@ export const ShowAnswer = () => {
       <Routes>
         <Route
           path={"correct"}
-          element={<h1 className={"correct-or-wrong-txt"}>✅ Correct!</h1>}
+          element={<h1 className={"question-and-score-txt"}>✅ Correct!</h1>}
         />
         <Route
           path={"wrong"}
-          element={<h1 className={"correct-or-wrong-txt"}>❌ Wrong</h1>}
+          element={<h1 className={"question-and-score-txt"}>❌ Wrong</h1>}
         />
       </Routes>
       <ul className={"ul"}>

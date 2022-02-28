@@ -1,4 +1,3 @@
-// todo husk å endre på interface navn overalt kun for ryddighetens skyld
 export interface QuestionAnimals {
   // todo egen info: endret id til ikke-optional, for POST req
   id: number;

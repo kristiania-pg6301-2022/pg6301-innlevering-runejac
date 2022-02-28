@@ -27,9 +27,18 @@
     flex-direction: column;
 }
 
-.correct-or-wrong-txt {
+.question-and-score-txt {
     display: flex;
     justify-content: center;
+    font: inherit;
+}
+
+.score-txt {
+    display: flex;
+    justify-content: center;
+    font: inherit;
+    background-color: rgba(0, 255, 0, 0.1);
+    border: 1px solid #00ff0e;
 }
 
 .ul {
@@ -64,6 +73,7 @@ body {
     background-color: #131313;
     color: #e8e8e8;
     font-family: "Leelawadee UI Semilight", sans-serif;
+    font-size: 25px;
     max-width: 500px;
     margin: auto;
 }

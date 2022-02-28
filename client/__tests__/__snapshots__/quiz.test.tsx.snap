@@ -1,15 +1,80 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`quiz pages At FrontPage: Should test questions answered and correct answered 1`] = `"<div><h1 class=\\"correct-or-wrong-txt\\">Take a quiz</h1><h4 class=\\"correct-or-wrong-txt\\" data-testid=\\"frontpage-score-status\\">4 / 5 correct answered</h4><div><a class=\\"home\\" href=\\"/question\\">New quiz</a></div></div>"`;
+exports[`quiz pages should register correct answer with simulate click 1`] = `
+"<div>
+  <p class=\\"question-and-score-txt\\">What is the slowest animal in the world?</p>
+  <div data-testid=\\"answer_a\\"><button class=\\"button\\" name=\\"answer\\">The turtle</button></div>
+  <div data-testid=\\"answer_b\\"><button class=\\"button\\" name=\\"answer\\">The sloth</button></div>
+</div>
+<div>
+  <p class=\\"score-txt\\" data-testid=\\"score-status\\">1 / 1 correct answered</p>
+</div>
+<div><a class=\\"home\\" href=\\"/\\">Home</a></div>"
+`;
 
-exports[`quiz pages At Score: Should test questions answered and correct answered 1`] = `"<div><p data-testid=\\"score-status\\">4 / 5 correct answered</p><p><a class=\\"home\\" href=\\"/\\">Home</a></p></div>"`;
+exports[`quiz pages should register wrong answer with simulate click 1`] = `
+"<div>
+  <p class=\\"question-and-score-txt\\">What is the slowest animal in the world?</p>
+  <div data-testid=\\"answer_a\\"><button class=\\"button\\" name=\\"answer\\">The turtle</button></div>
+  <div data-testid=\\"answer_b\\"><button class=\\"button\\" name=\\"answer\\">The sloth</button></div>
+</div>
+<div>
+  <p class=\\"score-txt\\" data-testid=\\"score-status\\">0 / 1 correct answered</p>
+</div>
+<div><a class=\\"home\\" href=\\"/\\">Home</a></div>"
+`;
 
-exports[`quiz pages Should only render startpage 1`] = `"<div><h1 class=\\"correct-or-wrong-txt\\">Take a quiz</h1><h4 class=\\"correct-or-wrong-txt\\" data-testid=\\"frontpage-score-status\\">NaN / NaN correct answered</h4><div><a class=\\"home\\" href=\\"/question\\">New quiz</a></div></div>"`;
+exports[`quiz pages should render FrontPage component, correct and answered 1`] = `
+"<div>
+  <h1 class=\\"question-and-score-txt\\">Take a quiz</h1>
+  <div>
+    <p class=\\"score-txt\\" data-testid=\\"score-status\\">1 / 2 correct answered</p>
+  </div>
+  <div><a class=\\"home\\" href=\\"/question\\">New quiz</a></div>
+</div>"
+`;
 
-exports[`quiz pages should register correct answer with simulate click 1`] = `"<h2>What is the slowest animal in the world?</h2><div><div data-testid=\\"answer_a\\"><button class=\\"button\\" name=\\"answer\\">The turtle</button></div><div data-testid=\\"answer_b\\"><button class=\\"button\\" name=\\"answer\\">The sloth</button></div></div><div><p data-testid=\\"score-status\\">1 / 1 correct answered</p><p><a class=\\"home\\" href=\\"/\\">Home</a></p></div>"`;
+exports[`quiz pages should render FrontPage component, correct and answered score 1`] = `
+"<div>
+  <h1 class=\\"question-and-score-txt\\">Take a quiz</h1>
+  <div>
+    <p class=\\"score-txt\\" data-testid=\\"score-status\\">1 / 2 correct answered</p>
+  </div>
+  <div><a class=\\"home\\" href=\\"/question\\">New quiz</a></div>
+</div>"
+`;
 
-exports[`quiz pages should register wrong answer with simulate click 1`] = `"<h2>What is the slowest animal in the world?</h2><div><div data-testid=\\"answer_a\\"><button class=\\"button\\" name=\\"answer\\">The turtle</button></div><div data-testid=\\"answer_b\\"><button class=\\"button\\" name=\\"answer\\">The sloth</button></div></div><div><p data-testid=\\"score-status\\">0 / 1 correct answered</p><p><a class=\\"home\\" href=\\"/\\">Home</a></p></div>"`;
+exports[`quiz pages should render Home component 1`] = `"<div><a class=\\"home\\" href=\\"/\\">Home</a></div>"`;
 
-exports[`quiz pages should render a question 1`] = `"<h2>What is the slowest animal in the world?</h2><div><div data-testid=\\"answer_a\\"><button class=\\"button\\" name=\\"answer\\">The turtle</button></div><div data-testid=\\"answer_b\\"><button class=\\"button\\" name=\\"answer\\">The sloth</button></div></div><div><p data-testid=\\"score-status\\">0 / 0 correct answered</p><p><a class=\\"home\\" href=\\"/\\">Home</a></p></div>"`;
+exports[`quiz pages should render Score component, correct and answered 1`] = `
+"<div>
+  <p class=\\"score-txt\\" data-testid=\\"score-status\\">4 / 5 correct answered</p>
+</div>"
+`;
 
-exports[`quiz pages should render a question and its answer options 1`] = `"<h2>What is the slowest animal in the world?</h2><div><div data-testid=\\"answer_a\\"><button class=\\"button\\" name=\\"answer\\">The turtle</button></div><div data-testid=\\"answer_b\\"><button class=\\"button\\" name=\\"answer\\">The sloth</button></div></div><div><p data-testid=\\"score-status\\">0 / 0 correct answered</p><p><a class=\\"home\\" href=\\"/\\">Home</a></p></div>"`;
+exports[`quiz pages should render Score component, correct and answered score 1`] = `
+"<div>
+  <p class=\\"score-txt\\" data-testid=\\"score-status\\">4 / 5 correct answered</p>
+</div>"
+`;
+
+exports[`quiz pages should render ShowAnswer component 1`] = `
+"<div class=\\"show-answer-div\\">
+  <ul class=\\"ul\\">
+    <li><a class=\\"home\\" href=\\"/question\\">More questions</a></li>
+    <li><a class=\\"home\\" href=\\"/\\">Home</a></li>
+  </ul>
+</div>"
+`;
+
+exports[`quiz pages should render a question and its answer options 1`] = `
+"<div>
+  <p class=\\"question-and-score-txt\\">What is the slowest animal in the world?</p>
+  <div data-testid=\\"answer_a\\"><button class=\\"button\\" name=\\"answer\\">The turtle</button></div>
+  <div data-testid=\\"answer_b\\"><button class=\\"button\\" name=\\"answer\\">The sloth</button></div>
+</div>
+<div>
+  <p class=\\"score-txt\\" data-testid=\\"score-status\\">0 / 0 correct answered</p>
+</div>
+<div><a class=\\"home\\" href=\\"/\\">Home</a></div>"
+`;

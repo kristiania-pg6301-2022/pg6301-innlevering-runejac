@@ -1,39 +1,22 @@
 import React from "react";
-import Quiz, { MapQuestions } from "../Quiz";
+import { MapQuestions } from "../Quiz";
 import { render, unmountComponentAtNode } from "react-dom";
 import { MemoryRouter } from "react-router-dom";
 import { act, Simulate } from "react-dom/test-utils";
 import "regenerator-runtime/runtime";
-import Mock = jest.Mock;
-import { QuestionContext } from "../contexts/context";
-import fetch from "node-fetch";
+const pretty = require("pretty");
 import { FrontPage } from "../components/FrontPage";
+import { Home } from "../components/Home";
 import { Score } from "../components/Score";
 import { randomQuestion } from "../questions-animals";
+import { ShowAnswer } from "../components/ShowAnswer";
 
 describe("quiz pages", () => {
   let container: HTMLDivElement;
 
-  /*   const questionApi = {
-    listQuestion: async () => [
-      {
-        id: 42,
-        question: "What is the slowest animal in the" + " world?",
-        answers: {
-          answer_a: "The turtle",
-          answer_b: "The sloth",
-        },
-        correct_answers: {
-          answer_a_correct: "false",
-          answer_b_correct: "true",
-        },
-      },
-    ],
-  }; */
-
   const questionApi = () => ({
-    question: "What is the slowest animal in the world?",
     id: 42,
+    question: "What is the slowest animal in the world?",
     answers: {
       answer_a: "The turtle",
       answer_b: "The sloth",
@@ -57,20 +40,29 @@ describe("quiz pages", () => {
 
   /**-------------------------------------------------------------------------------------**/
 
-  it("should only render startpage", async function () {
-    await act(async () => {
-      await render(
-        <MemoryRouter>
-          <Quiz />
-        </MemoryRouter>,
-        container
-      );
-    });
-    expect(container.innerHTML).toMatchSnapshot();
+  it("should render Home component", function () {
+    render(
+      <MemoryRouter>
+        <Home />
+      </MemoryRouter>,
+      container
+    );
+
+    expect(pretty(container.innerHTML)).toMatchSnapshot();
   });
 
-  // sjekker Score komponent, sender antall rette og totalt spm besvart
-  it("at Score: Should test questions answered and correct answered", function () {
+  it("should render ShowAnswer component", function () {
+    render(
+      <MemoryRouter>
+        <ShowAnswer />
+      </MemoryRouter>,
+      container
+    );
+
+    expect(pretty(container.innerHTML)).toMatchSnapshot();
+  });
+
+  it("should render Score component, correct and answered score", function () {
     render(
       <MemoryRouter>
         <Score correct={4} answered={5} />
@@ -81,27 +73,25 @@ describe("quiz pages", () => {
     expect(
       container.querySelector("[data-testid=score-status]")?.textContent
     ).toEqual("4 / 5 correct answered");
-    expect(container.innerHTML).toMatchSnapshot();
+    expect(pretty(container.innerHTML)).toMatchSnapshot();
   });
 
-  it("at FrontPage: Should test questions answered and correct answered", function () {
+  it("should render FrontPage component, correct and answered score", function () {
     render(
       <MemoryRouter>
-        <FrontPage correct={4} answered={5} />
+        <FrontPage correct={1} answered={2} />
       </MemoryRouter>,
       container
     );
     expect(
-      container.querySelector("[data-testid=frontpage-score-status]")
-        ?.textContent
-    ).toEqual("4 / 5 correct answered");
-    expect(container.innerHTML).toMatchSnapshot();
+      container.querySelector("[data-testid=score-status]")?.textContent
+    ).toEqual("1 / 2 correct answered");
+    expect(pretty(container.innerHTML)).toMatchSnapshot();
   });
 
   it("should render a question and its answer options", async function () {
     const answered = jest.fn().mockReturnValue(0);
     const correct = jest.fn().mockReturnValue(0);
-    // TODO her må du gjøre deg DONE angående score osv
 
     await act(async () => {
       render(
@@ -115,7 +105,7 @@ describe("quiz pages", () => {
         container
       );
     });
-    expect(container.innerHTML).toMatchSnapshot();
+    expect(pretty(container.innerHTML)).toMatchSnapshot();
     expect(questionApi).toBeDefined();
     expect(answered).toBeCalled();
     expect(correct).toBeCalled();
@@ -124,16 +114,17 @@ describe("quiz pages", () => {
   it("should register correct answer with simulate click", async function () {
     const reload = jest.fn();
     const postAnswer = jest.fn().mockImplementation(randomQuestion);
-    const answered = (x: number) => x + 1;
-    const correct = (x: number) => x + 1;
-    // TODO her må du gjøre deg DONE angående score osv
+    //FIXME skal ikke være randomQuestion her
+    const answered = jest.fn((x: number) => x + 1);
+    const correct = jest.fn((x: number) => x + 1);
+    // TODO får ikke til å få correct answer fra score GET (enda)
 
     await act(async () => {
       render(
         <MemoryRouter initialEntries={["/question"]}>
           <MapQuestions
-            correct={correct}
-            answered={answered}
+            correct={correct(0)}
+            answered={answered(0)}
             reloadScore={reload}
             questionApi={questionApi}
             postAnswerApi={postAnswer}
@@ -148,22 +139,28 @@ describe("quiz pages", () => {
     });
     expect(reload).toBeCalled();
     expect(postAnswer).toBeCalled();
-    expect(container.innerHTML).toMatchSnapshot();
+    expect(questionApi).toBeDefined();
+    expect(pretty(container.innerHTML)).toMatchSnapshot();
     expect(
       container.querySelector("[data-testid=score-status]")?.textContent
-    ).toEqual(`1 / 1 correct answered`);
+    ).toEqual("1 / 1 correct answered");
   });
 
   it("should register wrong answer with simulate click", async function () {
     const reload = jest.fn();
-    const postAnswer = jest.fn();
+    const postAnswer = jest.fn().mockImplementation(randomQuestion);
+    //FIXME skal ikke være randomQuestion her
+    const answered = jest.fn((x: number) => x + 1);
+    const correct = jest.fn((x: number) => x);
+
+    // TODO får ikke til å få correct answer fra score GET (enda)
 
     await act(async () => {
       render(
         <MemoryRouter initialEntries={["/question"]}>
           <MapQuestions
-            correct={0}
-            answered={1}
+            correct={correct(0)}
+            answered={answered(0)}
             reloadScore={reload}
             questionApi={questionApi}
             postAnswerApi={postAnswer}
@@ -177,9 +174,9 @@ describe("quiz pages", () => {
       Simulate.click(container.querySelector("[data-testid=answer_a] button")!);
     });
     expect(reload).toBeCalled();
-    // bruker "not" her fordi den ikke skal bli kalt, fordi svaret er feil og setCorrectAnswered skal ikke kalles
     expect(postAnswer).toBeCalled();
-    expect(container.innerHTML).toMatchSnapshot();
+    expect(questionApi).toBeDefined();
+    expect(pretty(container.innerHTML)).toMatchSnapshot();
     expect(
       container.querySelector("[data-testid=score-status]")?.textContent
     ).toEqual("0 / 1 correct answered");

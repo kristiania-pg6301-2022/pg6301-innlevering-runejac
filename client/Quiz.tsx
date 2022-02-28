@@ -2,9 +2,10 @@ import React from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { useLoader } from "./hooks/useLoader";
 import { FrontPage } from "./components/FrontPage";
-import { Score } from "./components/Score";
 import { ShowAnswer } from "./components/ShowAnswer";
 import { getApis } from "./api/getApis";
+import { Home } from "./components/Home";
+import { Score } from "./components/Score";
 
 export interface QuestionProps {
   answered: number | any;
@@ -50,8 +51,8 @@ export function MapQuestions(props: QuestionProps) {
 
   return (
     <>
-      <h2>{question.question}</h2>
       <div>
+        <p className={"question-and-score-txt"}>{question.question}</p>
         {Object.keys(question.answers).map((answer: string) =>
           question?.answers[answer] == null ? null : (
             <div key={answer} data-testid={answer}>
@@ -66,11 +67,8 @@ export function MapQuestions(props: QuestionProps) {
           )
         )}
       </div>
-      <Score
-        correct={props.correct}
-        answered={props.answered}
-        reloadScore={props.reloadScore}
-      />
+      <Score correct={props.correct} answered={props.answered} />
+      <Home />
     </>
   );
 }

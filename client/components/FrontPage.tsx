@@ -1,17 +1,13 @@
 import { Link } from "react-router-dom";
 import React from "react";
 import { QuestionProps } from "../Quiz";
+import { Score } from "./Score";
 
 export function FrontPage(props: QuestionProps) {
   return (
     <div>
-      <h1 className={"correct-or-wrong-txt"}>Take a quiz</h1>
-      <h4
-        className={"correct-or-wrong-txt"}
-        data-testid={"frontpage-score-status"}
-      >
-        {props.correct} / {props.answered} correct answered
-      </h4>
+      <h1 className={"question-and-score-txt"}>Take a quiz</h1>
+      <Score correct={props.correct} answered={props.answered} />
       <div>
         <Link className={"home"} to={"/question"}>
           New quiz
