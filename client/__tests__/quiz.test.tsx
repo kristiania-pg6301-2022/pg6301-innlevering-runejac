@@ -59,7 +59,6 @@ describe("quiz pages", () => {
       container
     );
     expect(pretty(container.innerHTML)).toMatchSnapshot();
-    console.log(pretty(container.innerHTML));
   });
 
   it("should render ShowAnswer component to '/wrong'", function () {
@@ -70,7 +69,6 @@ describe("quiz pages", () => {
       container
     );
     expect(pretty(container.innerHTML)).toMatchSnapshot();
-    console.log(pretty(container.innerHTML));
   });
 
   it("should render Score component, correct and answered score", function () {
