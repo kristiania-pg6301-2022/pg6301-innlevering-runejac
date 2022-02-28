@@ -8,11 +8,14 @@ import { Home } from "./components/Home";
 import { Score } from "./components/Score";
 
 export interface QuestionProps {
-  answered: number | any;
-  correct: number | any;
-  reloadScore?: any;
-  questionApi?: any | { questions: () => Promise<any> } | Promise<any>;
-  postAnswerApi?: any;
+  answered: number;
+  correct: number;
+  reloadScore?: () => void | Promise<void>;
+  questionApi?: any | { questions: () => Promise<any> };
+  postAnswerApi?: (
+    answer: string,
+    id: number
+  ) => { isCorrect: boolean } | PromiseLike<{ isCorrect: boolean }>;
 }
 
 export function MapQuestions(props: QuestionProps) {
@@ -25,12 +28,12 @@ export function MapQuestions(props: QuestionProps) {
   } = useLoader(props.questionApi);
 
   async function answerHandler(answer: string, id: number) {
-    const answerSent: { isCorrect: boolean } = await props.postAnswerApi(
+    const answerSent: { isCorrect: boolean } = await props.postAnswerApi!(
       answer,
       id
     );
 
-    props.reloadScore();
+    props.reloadScore!();
     // for å refreshe "score" så brukes reload fra /api/question/score- kallet
     if (answerSent.isCorrect) {
       navigate("/answer/correct");
@@ -74,17 +77,12 @@ export function MapQuestions(props: QuestionProps) {
 }
 
 function Quiz() {
-  const {
-    loading,
-    error,
-    data: score,
-    reload: reloadScore,
-  } = useLoader(getApis.scoreApi);
+  const { data: score, reload: reloadScore } = useLoader(getApis.scoreApi);
 
   // måtte ha ? her fordi jeg fikk
   // "TypeError: Cannot read properties of undefined (reading 'correct')"
-  const correct = Number(score?.correct);
-  const answered = Number(score?.answers);
+  const correct: number = Number(score?.correct);
+  const answered: number = Number(score?.answers);
 
   return (
     <Routes>

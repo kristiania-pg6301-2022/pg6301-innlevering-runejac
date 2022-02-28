@@ -14,7 +14,10 @@ export async function getJSON(apiUrl: RequestInfo) {
 }
 
 // POST request, må ha med method, headers og body
-export async function postJSON(apiUrl: RequestInfo, json: RequestInit | any) {
+export async function postJSON(
+  apiUrl: RequestInfo,
+  json: { answer: string; id: number }
+) {
   const res = await fetch(apiUrl, {
     method: "POST",
     headers: {

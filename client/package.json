@@ -10,7 +10,6 @@
     "format": "prettier --write *.{ts,jsx,js,tsx} .././__tests__/**/*.{ts,jsx,js,tsx}",
     "format:check": "prettier --check *.{ts,jsx,js,tsx} .././__tests__/**/*.{ts,jsx,js,tsx}",
     "lint": "eslint **/*.{ts,tsx,js,jsx}",
-    "test:coverage": "jest --coverage",
     "verify": "npm run format:check && tsc && npm run lint"
   },
   "keywords": [],

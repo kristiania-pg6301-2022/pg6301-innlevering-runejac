@@ -182,25 +182,22 @@ describe("quiz pages", () => {
     ).toEqual("0 / 1 correct answered");
   });
 
-  // henter ut keys(property) fra et array objekt
-  xit("should get keys from an object", function () {
-    // TODO HUSK xIT her, dette er ikke noe som passerer fra før
-    /* const answerNames: string[] = Object.keys(questionApi).filter(
-      (a) => questionApi[a]
-    ); */
+  it("should get keys from dummy object", function () {
+    const answerKeys = Object.keys(questionApi().answers).map((keys) => keys);
 
-    const keys = Object.keys(questionApi);
-
-    console.log(keys);
-    expect(keys).toEqual(["answer_a", "answer_b"]);
+    expect(answerKeys).toEqual(["answer_a", "answer_b"]);
   });
 
-  // henter ut values fra et array objekt
-  xit("should get values from an array object", function () {
-    // TODO HUSK xIT her, dette er ikke noe som passerer fra før
-    const answerValues = Object.values(questionApi).filter(
+  it("should get values from dummy object", function () {
+    const answerValues = Object.values(questionApi().answers).filter(
       (a: string | null) => a !== null
     );
     expect(answerValues).toEqual(["The turtle", "The sloth"]);
+  });
+
+  it("should get question from dummy object", function () {
+    const questionString = questionApi().question;
+
+    expect(questionString).toEqual("What is the slowest animal in the world?");
   });
 });

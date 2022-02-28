@@ -101,7 +101,7 @@
       "!babel.config.js",
       "!client/index.tsx",
       "!config/**",
-      "!d.ts",
+      "!.d.ts",
       "!client/questions.ts"
     ]
   },
