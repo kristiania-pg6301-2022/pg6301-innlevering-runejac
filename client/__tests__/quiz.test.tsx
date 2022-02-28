@@ -4,7 +4,7 @@ import { render, unmountComponentAtNode } from "react-dom";
 import { MemoryRouter } from "react-router-dom";
 import { act, Simulate } from "react-dom/test-utils";
 import "regenerator-runtime/runtime";
-const pretty = require("pretty");
+import pretty from "pretty";
 import { FrontPage } from "../components/FrontPage";
 import { Home } from "../components/Home";
 import { Score } from "../components/Score";
