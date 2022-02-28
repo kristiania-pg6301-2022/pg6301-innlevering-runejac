@@ -44,35 +44,6 @@ exports[`quiz pages should render Score component, correct and answered score 1`
 </div>"
 `;
 
-exports[`quiz pages should render ShowAnswer component '/correct' 1`] = `
-"<div class=\\"show-answer-div\\">
-  <h1 class=\\"question-and-score-txt\\">✅ Correct!</h1>
-  <ul class=\\"ul\\">
-    <li><a class=\\"home\\" href=\\"/question\\">More questions</a></li>
-    <li><a class=\\"home\\" href=\\"/\\">Home</a></li>
-  </ul>
-</div>"
-`;
-
-exports[`quiz pages should render ShowAnswer component '/wrong' 1`] = `
-"<div class=\\"show-answer-div\\">
-  <h1 class=\\"question-and-score-txt\\">❌ Wrong</h1>
-  <ul class=\\"ul\\">
-    <li><a class=\\"home\\" href=\\"/question\\">More questions</a></li>
-    <li><a class=\\"home\\" href=\\"/\\">Home</a></li>
-  </ul>
-</div>"
-`;
-
-exports[`quiz pages should render ShowAnswer component 1`] = `
-"<div class=\\"show-answer-div\\">
-  <ul class=\\"ul\\">
-    <li><a class=\\"home\\" href=\\"/question\\">More questions</a></li>
-    <li><a class=\\"home\\" href=\\"/\\">Home</a></li>
-  </ul>
-</div>"
-`;
-
 exports[`quiz pages should render ShowAnswer component to '/correct' 1`] = `
 "<div class=\\"show-answer-div\\">
   <h1 class=\\"question-and-score-txt\\">✅ Correct!</h1>
