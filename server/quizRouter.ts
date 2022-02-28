@@ -73,15 +73,6 @@ QuizRouter.post(
 );
 
 QuizRouter.get(
-  // kun for test hensikt
-  "/helloworld",
-  function (_req: express.Request, res: express.Response, _next: NextFunction) {
-    res.send("Hello world");
-  }
-);
-
-QuizRouter.get(
-  // kun for test hensikt
   "/*",
   function (_req: express.Request, res: express.Response, _next: NextFunction) {
     res.sendStatus(404);

@@ -34,6 +34,6 @@ https://innlevering-quiz-runejac.herokuapp.com/
 * [x] deploy til Heroku
 * [ ] tester for server
 * [ ] tester for client
-* [ ] github actions (🟢)
+* [X] github actions (🟢)
 * [ ] itsDone(ok: Chill)
 

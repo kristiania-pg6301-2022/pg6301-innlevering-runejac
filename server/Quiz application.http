@@ -3,7 +3,7 @@ GET {{server}}/question/random
 
 
 ### Correct answer
-POST {{server}}/question/answer
+POST {{server}}/question/answer/correct
 Content-Type: application/json
 
 {

@@ -18,6 +18,18 @@ describe("Start testing server side", function () {
     await request(app).get("/y89yh9dhawoioø20").expect(404);
   });
 
+  it("should return status code 404 on incorrect question", async function () {
+    await request(app).post("/question/answer").send({ id: 42 }).expect(404);
+  });
+
+  /*   it("should return status code 404, no question found", async function () {
+    const response = await request(app).get("/question/random").expect(404);
+    expect(response.body.question).not.toBe({
+      question: "Hello There, you can't find this question in the api",
+    });
+    /!* expect(response.status).toBe(404); *!/
+  }); */
+
   it("should return a random question with its properties", async function () {
     const response = await request(app).get("/question/random");
     expect(response.body).toMatchObject({
@@ -30,15 +42,26 @@ describe("Start testing server side", function () {
     expect(response.body).not.toHaveProperty("correct_answers");
   });
 
-  it("should respond to /helloworld and check content-type", async function () {
-    const response = await request(app).get("/helloworld");
-    expect(response.header["content-type"]).toBe("text/html; charset=utf-8");
+  it("should respond to /question/random and check content-type", async function () {
+    const response = await request(app).get("/question/random");
+    expect(response.header["content-type"]).toBe(
+      "application/json; charset=utf-8"
+    );
     expect(response.statusCode).toBe(200);
-    expect(response.text).toEqual("Hello world");
+    expect(response.text).toEqual(response.text);
   });
 
-  it("should respond to correct answers", async function () {
-    // todo snakker ikke med Quiz application.http??? wtf
+  it("should count score", async function () {
+    const agent = request.agent(app);
+    await agent.post("/question/answer").send({ id: 974, answer: "answer_d" });
+    await agent.post("/question/answer").send({ id: 976, answer: "answer_a" });
+    await agent.get("/question/score").expect(200).expect({
+      answers: 2,
+      correct: 1,
+    });
+  });
+
+  it("should respond to correct answer", async function () {
     await request(app)
       .post("/question/answer")
       .send({
@@ -48,5 +71,13 @@ describe("Start testing server side", function () {
       .expect({ isCorrect: true });
   });
 
-  //TODO lag test for score
+  it("should respond to wrong answer", async function () {
+    await request(app)
+      .post("/question/answer")
+      .send({
+        id: 974,
+        answer: "answer_b",
+      })
+      .expect({ isCorrect: false });
+  });
 });
