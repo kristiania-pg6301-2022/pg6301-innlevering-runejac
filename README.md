@@ -32,7 +32,7 @@ https://innlevering-quiz-runejac.herokuapp.com/
 * [x] POST answers
 * [x] GET score
 * [x] deploy til Heroku
-* [ ] tester for server
+* [x] tester for server
 * [ ] tester for client
 * [X] github actions (🟢)
 * [ ] itsDone(ok: Chill)
