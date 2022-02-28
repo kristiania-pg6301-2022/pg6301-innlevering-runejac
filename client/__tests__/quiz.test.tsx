@@ -4,12 +4,12 @@ import { render, unmountComponentAtNode } from "react-dom";
 import { MemoryRouter } from "react-router-dom";
 import { act, Simulate } from "react-dom/test-utils";
 import "regenerator-runtime/runtime";
-import pretty from "pretty";
 import { FrontPage } from "../components/FrontPage";
 import { Home } from "../components/Home";
 import { Score } from "../components/Score";
 import { randomQuestion } from "../questions-animals";
 import { ShowAnswer } from "../components/ShowAnswer";
+import pretty from "pretty";
 
 describe("quiz pages", () => {
   let container: HTMLDivElement;

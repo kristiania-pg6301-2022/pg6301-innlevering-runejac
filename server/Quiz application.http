@@ -1,9 +1,9 @@
 ### Generate random question
-GET {{server}}/question
+GET {{server}}/question/random
 
 
 ### Correct answer
-POST {{server}}/question/answer/correct
+POST {{server}}/question/answer
 Content-Type: application/json
 
 {
@@ -12,7 +12,7 @@ Content-Type: application/json
 }
 
 ### Incorrect answer
-POST {{server}}/question/answer/wrong
+POST {{server}}/question/answer
 Content-Type: application/json
 
 {
