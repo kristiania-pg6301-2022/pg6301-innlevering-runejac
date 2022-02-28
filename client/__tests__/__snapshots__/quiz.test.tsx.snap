@@ -24,16 +24,6 @@ exports[`quiz pages should register wrong answer with simulate click 1`] = `
 <div><a class=\\"home\\" href=\\"/\\">Home</a></div>"
 `;
 
-exports[`quiz pages should render FrontPage component, correct and answered 1`] = `
-"<div>
-  <h1 class=\\"question-and-score-txt\\">Take a quiz</h1>
-  <div>
-    <p class=\\"score-txt\\" data-testid=\\"score-status\\">1 / 2 correct answered</p>
-  </div>
-  <div><a class=\\"home\\" href=\\"/question\\">New quiz</a></div>
-</div>"
-`;
-
 exports[`quiz pages should render FrontPage component, correct and answered score 1`] = `
 "<div>
   <h1 class=\\"question-and-score-txt\\">Take a quiz</h1>
@@ -45,12 +35,6 @@ exports[`quiz pages should render FrontPage component, correct and answered scor
 `;
 
 exports[`quiz pages should render Home component 1`] = `"<div><a class=\\"home\\" href=\\"/\\">Home</a></div>"`;
-
-exports[`quiz pages should render Score component, correct and answered 1`] = `
-"<div>
-  <p class=\\"score-txt\\" data-testid=\\"score-status\\">4 / 5 correct answered</p>
-</div>"
-`;
 
 exports[`quiz pages should render Score component, correct and answered score 1`] = `
 "<div>
