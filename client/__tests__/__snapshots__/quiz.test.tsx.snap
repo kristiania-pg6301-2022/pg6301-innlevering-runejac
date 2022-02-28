@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`quiz pages should meet 'Loading...' on trying to receive a question 1`] = `"<h2>Loading...</h2>"`;
+
 exports[`quiz pages should register correct answer with simulate click 1`] = `
 "<div>
   <p class=\\"question-and-score-txt\\">What is the slowest animal in the world?</p>
@@ -42,8 +44,48 @@ exports[`quiz pages should render Score component, correct and answered score 1`
 </div>"
 `;
 
+exports[`quiz pages should render ShowAnswer component '/correct' 1`] = `
+"<div class=\\"show-answer-div\\">
+  <h1 class=\\"question-and-score-txt\\">✅ Correct!</h1>
+  <ul class=\\"ul\\">
+    <li><a class=\\"home\\" href=\\"/question\\">More questions</a></li>
+    <li><a class=\\"home\\" href=\\"/\\">Home</a></li>
+  </ul>
+</div>"
+`;
+
+exports[`quiz pages should render ShowAnswer component '/wrong' 1`] = `
+"<div class=\\"show-answer-div\\">
+  <h1 class=\\"question-and-score-txt\\">❌ Wrong</h1>
+  <ul class=\\"ul\\">
+    <li><a class=\\"home\\" href=\\"/question\\">More questions</a></li>
+    <li><a class=\\"home\\" href=\\"/\\">Home</a></li>
+  </ul>
+</div>"
+`;
+
 exports[`quiz pages should render ShowAnswer component 1`] = `
 "<div class=\\"show-answer-div\\">
+  <ul class=\\"ul\\">
+    <li><a class=\\"home\\" href=\\"/question\\">More questions</a></li>
+    <li><a class=\\"home\\" href=\\"/\\">Home</a></li>
+  </ul>
+</div>"
+`;
+
+exports[`quiz pages should render ShowAnswer component to '/correct' 1`] = `
+"<div class=\\"show-answer-div\\">
+  <h1 class=\\"question-and-score-txt\\">✅ Correct!</h1>
+  <ul class=\\"ul\\">
+    <li><a class=\\"home\\" href=\\"/question\\">More questions</a></li>
+    <li><a class=\\"home\\" href=\\"/\\">Home</a></li>
+  </ul>
+</div>"
+`;
+
+exports[`quiz pages should render ShowAnswer component to '/wrong' 1`] = `
+"<div class=\\"show-answer-div\\">
+  <h1 class=\\"question-and-score-txt\\">❌ Wrong</h1>
   <ul class=\\"ul\\">
     <li><a class=\\"home\\" href=\\"/question\\">More questions</a></li>
     <li><a class=\\"home\\" href=\\"/\\">Home</a></li>
@@ -62,3 +104,5 @@ exports[`quiz pages should render a question and its answer options 1`] = `
 </div>
 <div><a class=\\"home\\" href=\\"/\\">Home</a></div>"
 `;
+
+exports[`quiz pages should trigger an error on trying to receive a question 1`] = `"<div class=\\"error-message\\">An error occurred: TypeError: loadingFn is not a function</div>"`;

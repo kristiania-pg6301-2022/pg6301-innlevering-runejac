@@ -51,15 +51,26 @@ describe("quiz pages", () => {
     expect(pretty(container.innerHTML)).toMatchSnapshot();
   });
 
-  it("should render ShowAnswer component", function () {
+  it("should render ShowAnswer component to '/correct'", function () {
     render(
-      <MemoryRouter>
+      <MemoryRouter initialEntries={["/correct"]}>
         <ShowAnswer />
       </MemoryRouter>,
       container
     );
-
     expect(pretty(container.innerHTML)).toMatchSnapshot();
+    console.log(pretty(container.innerHTML));
+  });
+
+  it("should render ShowAnswer component to '/wrong'", function () {
+    render(
+      <MemoryRouter initialEntries={["/wrong"]}>
+        <ShowAnswer />
+      </MemoryRouter>,
+      container
+    );
+    expect(pretty(container.innerHTML)).toMatchSnapshot();
+    console.log(pretty(container.innerHTML));
   });
 
   it("should render Score component, correct and answered score", function () {
@@ -87,6 +98,46 @@ describe("quiz pages", () => {
       container.querySelector("[data-testid=score-status]")?.textContent
     ).toEqual("1 / 2 correct answered");
     expect(pretty(container.innerHTML)).toMatchSnapshot();
+  });
+
+  it("should meet 'Loading...' on trying to receive a question", async function () {
+    let answered: number;
+    let correct: number;
+
+    await act(async () => {
+      render(
+        <MemoryRouter initialEntries={["/question"]}>
+          <MapQuestions
+            answered={answered}
+            correct={correct}
+            questionApi={jest.fn()}
+          />
+        </MemoryRouter>,
+        container
+      );
+    });
+    expect(pretty(container.innerHTML)).toMatchSnapshot();
+    expect(jest.fn(questionApi)).not.toBeCalled();
+  });
+
+  it("should trigger an error on trying to receive a question", async function () {
+    let answered: number;
+    let correct: number;
+
+    await act(async () => {
+      render(
+        <MemoryRouter initialEntries={["/question"]}>
+          <MapQuestions
+            answered={answered}
+            correct={correct}
+            questionApi={undefined}
+          />
+        </MemoryRouter>,
+        container
+      );
+    });
+    expect(pretty(container.innerHTML)).toMatchSnapshot();
+    expect(jest.fn(questionApi)).not.toBeCalled();
   });
 
   it("should render a question and its answer options", async function () {
