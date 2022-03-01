@@ -1,15 +1,15 @@
 import React from "react";
-import { MapQuestions } from "../Quiz";
 import { render, unmountComponentAtNode } from "react-dom";
 import { MemoryRouter } from "react-router-dom";
 import { act, Simulate } from "react-dom/test-utils";
 import "regenerator-runtime/runtime";
-import { FrontPage } from "../components/FrontPage";
-import { Home } from "../components/Home";
-import { Score } from "../components/Score";
+import { Home } from "../components/pages/Home";
+import { FrontPage } from "../components/pages/FrontPage";
+import { ShowAnswer } from "../components/pages/ShowAnswer";
 import { randomQuestion } from "../questions-animals";
-import { ShowAnswer } from "../components/ShowAnswer";
 import pretty from "pretty";
+import { Score } from "../components/Score";
+import { QuestionAndAnswers } from "../components/QuestionAndAnswers";
 
 describe("quiz pages", () => {
   let container: HTMLDivElement;
@@ -105,7 +105,7 @@ describe("quiz pages", () => {
     await act(async () => {
       render(
         <MemoryRouter initialEntries={["/question"]}>
-          <MapQuestions
+          <QuestionAndAnswers
             answered={answered}
             correct={correct}
             questionApi={jest.fn()}
@@ -125,7 +125,7 @@ describe("quiz pages", () => {
     await act(async () => {
       render(
         <MemoryRouter initialEntries={["/question"]}>
-          <MapQuestions
+          <QuestionAndAnswers
             answered={answered}
             correct={correct}
             questionApi={undefined}
@@ -145,7 +145,7 @@ describe("quiz pages", () => {
     await act(async () => {
       render(
         <MemoryRouter initialEntries={["/question"]}>
-          <MapQuestions
+          <QuestionAndAnswers
             answered={answered()}
             correct={correct()}
             questionApi={questionApi}
@@ -154,24 +154,24 @@ describe("quiz pages", () => {
         container
       );
     });
-    expect(pretty(container.innerHTML)).toMatchSnapshot();
     expect(questionApi).toBeDefined();
     expect(answered).toBeCalled();
     expect(correct).toBeCalled();
+    expect(pretty(container.innerHTML)).toMatchSnapshot();
   });
 
   it("should register correct answer with simulate click", async function () {
     const reload = jest.fn();
     const postAnswer = jest.fn().mockImplementation(randomQuestion);
-    //FIXME skal ikke være randomQuestion her
+    // fake grønn, er ikke randomQuestion som skal mockes her
     const answered = jest.fn((x: number) => x + 1);
     const correct = jest.fn((x: number) => x + 1);
-    // TODO får ikke til å få correct answer fra score GET (enda)
+    // TODO får ikke til å få correct answer fra score GET
 
     await act(async () => {
       render(
         <MemoryRouter initialEntries={["/question"]}>
-          <MapQuestions
+          <QuestionAndAnswers
             correct={correct(0)}
             answered={answered(0)}
             reloadScore={reload}
@@ -193,12 +193,13 @@ describe("quiz pages", () => {
     expect(
       container.querySelector("[data-testid=score-status]")?.textContent
     ).toEqual("1 / 1 correct answered");
+    console.log(pretty(container.innerHTML));
   });
 
   it("should register wrong answer with simulate click", async function () {
     const reload = jest.fn();
     const postAnswer = jest.fn().mockImplementation(randomQuestion);
-    //FIXME skal ikke være randomQuestion her
+    // fake grønn, er ikke randomQuestion som skal mockes her
     const answered = jest.fn((x: number) => x + 1);
     const correct = jest.fn((x: number) => x);
 
@@ -207,7 +208,7 @@ describe("quiz pages", () => {
     await act(async () => {
       render(
         <MemoryRouter initialEntries={["/question"]}>
-          <MapQuestions
+          <QuestionAndAnswers
             correct={correct(0)}
             answered={answered(0)}
             reloadScore={reload}

@@ -28,12 +28,12 @@ https://innlevering-quiz-runejac.herokuapp.com/
 * [x] client side
 * [x] server side
 * [x] Coveralls io
-* [x] GET questions
-* [x] POST answers
-* [x] GET score
+* [x] GET api/question/random
+* [x] POST api/question/answer
+* [x] GET api/question/score
 * [x] deploy til Heroku
 * [x] tester for server
-* [ ] tester for client
-* [X] github actions (🟢)
+* [x] tester for client (ikke helt done)
+* [x] github actions (🟢)
 * [ ] itsDone(ok: Chill)
 

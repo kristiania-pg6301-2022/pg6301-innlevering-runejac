@@ -102,7 +102,7 @@
       "!client/index.tsx",
       "!config/**",
       "!.d.ts",
-      "!client/questions.ts"
+      "!client/components/apiHandler.ts"
     ]
   },
   "engines": {

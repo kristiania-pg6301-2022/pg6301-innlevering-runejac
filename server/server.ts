@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import path from "path";
-import { QuizRouter } from "./quizRouter";
+import { quizApi } from "./quizApi";
 
 dotenv.config();
 const app: Express = express();
@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));
 const port = process.env.PORT;
 
-app.use("/api", QuizRouter);
+app.use("/api", quizApi);
 app.use(express.static(path.resolve("..", "client", "dist")));
 app.use(
   (req: express.Request, res: express.Response, next: express.NextFunction) => {

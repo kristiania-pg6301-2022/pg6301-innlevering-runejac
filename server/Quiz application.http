@@ -1,18 +1,29 @@
-### Generate random question
-GET {{server}}/question/random
+### GET frontpage
+GET {{server}}
+Accept: text/html
 
+### GET api random question and its answer options
+GET {{server}}/api/question/random
+Accept: application/json
 
-### Correct answer
-POST {{server}}/question/answer/correct
+### GET api score
+GET {{server}}/api/question/score
+Accept: application/json
+
+### GET api wrong url
+GET {{server}}/api/*
+
+### POST api correct answer
+POST {{server}}/api/question/answer
 Content-Type: application/json
 
 {
   "id": 974,
-  "answer": "answer_b"
+  "answer": "answer_d"
 }
 
-### Incorrect answer
-POST {{server}}/question/answer
+### POST api incorrect answer
+POST {{server}}/api/question/answer
 Content-Type: application/json
 
 {

@@ -5,9 +5,9 @@ import {
   randomQuestion,
 } from "../client/questions-animals";
 
-export const QuizRouter = express.Router();
+export const quizApi = express.Router();
 
-QuizRouter.get(
+quizApi.get(
   "/question/score",
   (req: express.Request, res: express.Response) => {
     const score = req.signedCookies.score
@@ -17,12 +17,11 @@ QuizRouter.get(
     res.send({
       answers: score.answers,
       correct: score.correct,
-      // kan og skrive "score" her og, men syns det er mer tydelig
     });
   }
 );
 
-QuizRouter.get(
+quizApi.get(
   "/question/random",
   (
     req: express.Request,
@@ -32,13 +31,13 @@ QuizRouter.get(
     const { question, id, answers, category } = randomQuestion();
 
     if (!question) {
-      res.status(404).send("GET request not found from quizRouter.ts line 22");
+      res.status(404).send("GET request not found");
     }
     res.json({ question, id, answers, category });
   }
 );
 
-QuizRouter.post(
+quizApi.post(
   "/question/answer",
   (
     req: express.Request,
@@ -72,9 +71,9 @@ QuizRouter.post(
   }
 );
 
-QuizRouter.get(
+quizApi.get(
   "/*",
   function (_req: express.Request, res: express.Response, _next: NextFunction) {
-    res.sendStatus(404);
+    res.status(404).send("No question found");
   }
 );
