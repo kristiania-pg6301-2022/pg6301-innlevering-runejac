@@ -10,6 +10,7 @@ import { randomQuestion } from "../questions-animals";
 import pretty from "pretty";
 import { Score } from "../components/Score";
 import { QuestionAndAnswers } from "../components/QuestionAndAnswers";
+import Quiz from "../Quiz";
 
 describe("quiz pages", () => {
   let container: HTMLDivElement;
@@ -39,6 +40,19 @@ describe("quiz pages", () => {
   });
 
   /**-------------------------------------------------------------------------------------**/
+
+  it("should render Quiz component", async function () {
+    await act(async () => {
+      render(
+        <MemoryRouter>
+          <Quiz />
+        </MemoryRouter>,
+        container
+      );
+    });
+
+    expect(pretty(container.innerHTML)).toMatchSnapshot();
+  });
 
   it("should render Home component", function () {
     render(
