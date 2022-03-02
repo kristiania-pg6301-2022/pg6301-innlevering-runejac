@@ -10,9 +10,9 @@ export function useLoader(loadingFn: {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | undefined>();
   const [data, setData] = useState<QuestionAnimals | undefined | any>();
-  // kan sette <QuestionAnimals> her i stedet for <any>, men setter <any> ellers får
-  // jeg rød line på 23 i Quiz.tsx, for .correct finnes ikke i interfacet,
-  // men når den kompilerer fanger
+  // kan sette <QuestionAnimals> kun her i stedet for <any>, men setter <any> i tillegg
+  // ellers får jeg rød line på 23 i Quiz.tsx, for .correct finnes ikke i interfacet
+  // QuestionAnimals, men når den kompilerer fanger
   // den heller data fra linje 19 i quizApi.ts
 
   async function reload(): Promise<void> {

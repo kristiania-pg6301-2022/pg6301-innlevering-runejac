@@ -22,6 +22,9 @@ function Quiz() {
 
   const correct: number = score?.correct;
   const answered: number = score?.answers;
+  // her må data settes any fra useLoader, for at den ikke skal klage for den leter
+  // etter "correct" i QuestionAnimals interfacet, og det finnes jo ikke, men når den
+  // kompilerer så fanger den rett data og det er fra fra linje 19 i quizApi.ts
 
   return (
     <Routes>
