@@ -11,6 +11,7 @@ import pretty from "pretty";
 import { Score } from "../components/Score";
 import { QuestionAndAnswers } from "../components/QuestionAndAnswers";
 import Quiz from "../Quiz";
+import { getApis } from "../api/getApis";
 
 describe("quiz pages", () => {
   let container: HTMLDivElement;
@@ -176,11 +177,14 @@ describe("quiz pages", () => {
 
   it("should register correct answer with simulate click", async function () {
     const reload = jest.fn();
-    const postAnswer = jest.fn().mockImplementation(randomQuestion);
-    // fake grønn, er ikke randomQuestion som skal mockes her
+    const answer = questionApi().answers.answer_b;
+    const id = questionApi().id;
+    /* const postAnswer = await jest
+      .fn()
+      .mockImplementation(getApis.postAnswerApi); */
+    const mockFunc = jest.fn().mockImplementation(randomQuestion);
     const answered = jest.fn((x: number) => x + 1);
     const correct = jest.fn((x: number) => x + 1);
-    // TODO får ikke til å få correct answer fra score GET
 
     await act(async () => {
       render(
@@ -190,7 +194,7 @@ describe("quiz pages", () => {
             answered={answered(0)}
             reloadScore={reload}
             questionApi={questionApi}
-            postAnswerApi={postAnswer}
+            postAnswerApi={mockFunc}
           />
         </MemoryRouter>,
         container
@@ -201,7 +205,7 @@ describe("quiz pages", () => {
       Simulate.click(container.querySelector("[data-testid=answer_b] button")!);
     });
     expect(reload).toBeCalled();
-    expect(postAnswer).toBeCalled();
+    expect(mockFunc).toBeCalled();
     expect(questionApi).toBeDefined();
     expect(pretty(container.innerHTML)).toMatchSnapshot();
     expect(

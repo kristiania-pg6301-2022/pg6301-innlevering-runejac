@@ -1,12 +1,11 @@
 import { SetStateAction, useEffect, useState } from "react";
 import { QuestionAnimals } from "../questions-animals";
 
-// hook from class
 export function useLoader(loadingFn: {
-  (): Promise<any>;
+  (): Promise<QuestionAnimals>;
   ():
-    | SetStateAction<QuestionAnimals | undefined>
-    | PromiseLike<SetStateAction<QuestionAnimals | undefined>>;
+    | SetStateAction<QuestionAnimals>
+    | PromiseLike<SetStateAction<QuestionAnimals>>;
 }) {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | undefined>();

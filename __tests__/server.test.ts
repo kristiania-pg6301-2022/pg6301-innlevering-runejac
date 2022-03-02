@@ -63,7 +63,7 @@ describe("Start testing server side", function () {
     await agent.post("/question/answer").send({ id: 976, answer: "answer_a" });
     await agent.get("/question/score").expect(200).expect({
       answers: 2,
-      correct: 1,
+      correctTotal: 1,
     });
   });
 
