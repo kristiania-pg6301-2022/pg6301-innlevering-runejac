@@ -207,7 +207,6 @@ describe("quiz pages", () => {
     expect(
       container.querySelector("[data-testid=score-status]")?.textContent
     ).toEqual("1 / 1 correct answered");
-    console.log(pretty(container.innerHTML));
   });
 
   it("should register wrong answer with simulate click", async function () {

@@ -12,9 +12,9 @@ export function useLoader(loadingFn: {
   const [error, setError] = useState<Error | undefined>();
   const [data, setData] = useState<QuestionAnimals | undefined | any>();
   // kan sette <QuestionAnimals> her i stedet for <any>, men setter <any> ellers får
-  // jeg rød line på 156 i Quiz.tsx, for .correct finnes ikke i interfacet,
+  // jeg rød line på 23 i Quiz.tsx, for .correct finnes ikke i interfacet,
   // men når den kompilerer fanger
-  // den heller data fra linje 23 i quizRouter.ts
+  // den heller data fra linje 19 i quizApi.ts
 
   async function reload(): Promise<void> {
     setLoading(true);
@@ -29,8 +29,11 @@ export function useLoader(loadingFn: {
     }
   }
 
-  // @ts-ignore
-  useEffect(reload, []);
+  useEffect(() => {
+    (async () => {
+      await reload();
+    })();
+  }, [loadingFn]);
 
   return { loading, error, data, reload };
 }

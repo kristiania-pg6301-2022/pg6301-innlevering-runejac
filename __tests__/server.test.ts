@@ -34,7 +34,6 @@ describe("Start testing server side", function () {
 
     expect(response.statusCode).toBe(404);
     expect(response.text).toEqual("No question found");
-    console.log(response.text);
   });
 
   it("should return a random question with its properties", async function () {

@@ -19,8 +19,14 @@ module.exports = {
     ecmaVersion: "latest",
     sourceType: "module",
   },
-  plugins: ["react", "@typescript-eslint"],
+  plugins: ["react", "@typescript-eslint", "prettier"],
   rules: {
     "@typescript-eslint/ban-ts-comment": "off",
+    "react/jsx-filename-extension": ["warn", { extensions: [".tsx"] }],
+  },
+  settings: {
+    react: {
+      version: "detect",
+    },
   },
 };
