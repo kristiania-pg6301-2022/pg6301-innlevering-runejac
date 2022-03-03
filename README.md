@@ -2,7 +2,7 @@
 <h6 align="center">
 
 [![Build](https://github.com/runejac/web-api-own-account-innlevering-runejac/actions/workflows/test.yml/badge.svg)](https://github.com/runejac/web-api-own-account-innlevering-runejac/actions/workflows/test.yml)
-[![Coverage Status](https://coveralls.io/repos/github/runejac/web-api-own-account-innlevering-runejac/badge.svg?branch=main&t=cenNWE)](https://coveralls.io/github/runejac/web-api-own-account-innlevering-runejac?branch=main)
+[![Coverage Status](https://coveralls.io/repos/github/kristiania-pg6301-2022/pg6301-innlevering-runejac/badge.svg?branch=main)](https://coveralls.io/github/kristiania-pg6301-2022/pg6301-innlevering-runejac?branch=main)
 
 </h6>
 
