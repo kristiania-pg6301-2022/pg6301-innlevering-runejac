@@ -5,19 +5,6 @@ import { getApis } from "./api/getApis";
 import { FrontPage } from "./components/pages/FrontPage";
 import { ShowAnswer } from "./components/pages/ShowAnswer";
 import { QuestionAndAnswers } from "./components/QuestionAndAnswers";
-import { HttpError } from "./api/http";
-
-export interface QuestionProps {
-  error?: HttpError;
-  answered: number;
-  correct: number;
-  reloadScore?: () => void | Promise<void>;
-  questionApi?: any | { questions: () => Promise<any> };
-  postAnswerApi?: (
-    answer: string,
-    id: number
-  ) => { isCorrect: boolean } | PromiseLike<{ isCorrect: boolean }>;
-}
 
 function Quiz() {
   const {
@@ -28,6 +15,7 @@ function Quiz() {
 
   const correct: number = score?.correct;
   const answered: number = score?.answers;
+
   // her må data settes any fra useLoader, for at den ikke skal klage for den leter
   // etter "correct" i QuestionAnimals interfacet, og det finnes jo ikke, men når den
   // kompilerer så fanger den rett data og det er fra fra linje 19 i quizApi.ts

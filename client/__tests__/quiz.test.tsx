@@ -6,12 +6,16 @@ import "regenerator-runtime/runtime";
 import { Home } from "../components/pages/Home";
 import { FrontPage } from "../components/pages/FrontPage";
 import { ShowAnswer } from "../components/pages/ShowAnswer";
-import { randomQuestion } from "../questions-animals";
+import {
+  isCorrectAnswer,
+  QuestionAnimals,
+  randomQuestion,
+} from "../questions-animals";
 import pretty from "pretty";
 import { Score } from "../components/Score";
 import { QuestionAndAnswers } from "../components/QuestionAndAnswers";
 import Quiz from "../Quiz";
-import { HttpError } from "../api/http";
+import HttpError from "../api/http";
 
 describe("quiz pages", () => {
   let container: HTMLDivElement;
@@ -179,12 +183,9 @@ describe("quiz pages", () => {
 
   it("should register correct answer with simulate click", async function () {
     const reload = jest.fn();
-    const answer = questionApi().answers.answer_b;
+    const answer = questionApi().correct_answers.answer_b_correct;
     const id = questionApi().id;
-    /* const postAnswer = await jest
-      .fn()
-      .mockImplementation(getApis.postAnswerApi); */
-    const mockFunc = jest.fn().mockImplementation(randomQuestion);
+    const postAnswer = jest.fn().mockImplementation(randomQuestion);
     const answered = jest.fn((x: number) => x + 1);
     const correct = jest.fn((x: number) => x + 1);
 
@@ -196,7 +197,7 @@ describe("quiz pages", () => {
             answered={answered(0)}
             reloadScore={reload}
             questionApi={questionApi}
-            postAnswerApi={mockFunc}
+            postAnswerApi={postAnswer}
           />
         </MemoryRouter>,
         container
@@ -207,7 +208,7 @@ describe("quiz pages", () => {
       Simulate.click(container.querySelector("[data-testid=answer_b] button")!);
     });
     expect(reload).toBeCalled();
-    expect(mockFunc).toBeCalled();
+    expect(postAnswer).toBeCalled();
     expect(questionApi).toBeDefined();
     expect(pretty(container.innerHTML)).toMatchSnapshot();
     expect(

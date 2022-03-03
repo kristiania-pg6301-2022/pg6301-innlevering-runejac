@@ -3,12 +3,15 @@ import { useLoader } from "../hooks/useLoader";
 import { Score } from "./Score";
 import { Home } from "./pages/Home";
 import React from "react";
-import { QuestionProps } from "../Quiz";
-import { HttpError } from "../api/http";
+import HttpError from "../api/http";
+import { QuestionProps } from "../models/QuestionProps";
 
 export function QuestionAndAnswers(props: QuestionProps) {
   const navigate = useNavigate();
-  const httpError = new HttpError(404, "404 Not found - Cannot get question");
+  const httpError: HttpError | undefined = new HttpError(
+    404,
+    "404 Not found - Cannot get question"
+  );
   const {
     loading,
     error,
@@ -42,7 +45,7 @@ export function QuestionAndAnswers(props: QuestionProps) {
       <div>
         <p className={"question-and-score-txt"}>{question.question}</p>
         {Object.keys(question.answers).map((answer: string) =>
-          question?.answers[answer] == null ? null : (
+          question.answers[answer] == null ? null : (
             <div key={answer} data-testid={answer}>
               <button
                 className={"button"}

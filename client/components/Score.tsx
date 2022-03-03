@@ -1,5 +1,5 @@
 import React from "react";
-import { QuestionProps } from "../Quiz";
+import { QuestionProps } from "../models/QuestionProps";
 
 export function Score(props: QuestionProps) {
   return (

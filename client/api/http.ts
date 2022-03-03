@@ -1,7 +1,12 @@
-export class HttpError extends Error {
-  constructor(status: number, statusText: string) {
+class HttpError extends Error {
+  statusCode: number;
+  statusText: string;
+
+  constructor(statusCode: number, statusText: string) {
     super("Custom exception thrown: " + statusText);
-    // @ts-ignore
-    this.status = status;
+    this.statusCode = statusCode;
+    this.statusText = statusText;
   }
 }
+
+export default HttpError;

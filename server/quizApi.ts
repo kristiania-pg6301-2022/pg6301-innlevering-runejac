@@ -10,7 +10,7 @@ export const quizApi = express.Router();
 quizApi.get(
   "/question/score",
   (req: express.Request, res: express.Response) => {
-    const score = req.signedCookies.score
+    const score: { answers: number; correct: number } = req.signedCookies.score
       ? JSON.parse(req.signedCookies.score)
       : { answers: 0, correct: 0 };
 

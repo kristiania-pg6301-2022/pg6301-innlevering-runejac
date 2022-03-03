@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import React from "react";
-import { QuestionProps } from "../../Quiz";
 import { Score } from "../Score";
+import { QuestionProps } from "../../models/QuestionProps";
 
 export function FrontPage(props: QuestionProps) {
   return (

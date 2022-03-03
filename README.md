@@ -1,8 +1,8 @@
 # Innlevering, deploy quiz frontend and server to Heroku
 <h6 align="center">
 
-[![Build](https://github.com/runejac/web-api-own-account-innlevering-runejac/actions/workflows/test.yml/badge.svg)](https://github.com/runejac/web-api-own-account-innlevering-runejac/actions/workflows/test.yml)
-[![Coverage Status](https://coveralls.io/repos/github/runejac/web-api-own-account-innlevering-runejac/badge.svg?branch=main&t=cenNWE)](https://coveralls.io/github/runejac/web-api-own-account-innlevering-runejac?branch=main)
+[![Build](https://github.com/kristiania-pg6301-2022/pg6301-innlevering-runejac/actions/workflows/test.yml/badge.svg)](https://github.com/kristiania-pg6301-2022/pg6301-innlevering-runejac/actions/workflows/test.yml)
+[![Coverage Status](https://coveralls.io/repos/github/kristiania-pg6301-2022/pg6301-innlevering-runejac/badge.svg?branch=main)](https://coveralls.io/github/kristiania-pg6301-2022/pg6301-innlevering-runejac?branch=main)
 
 </h6>
 
@@ -37,3 +37,16 @@ https://innlevering-quiz-runejac.herokuapp.com/
 * [x] github actions (🟢)
 * [ ] itsDone(ok: Chill)
 
+---
+
+#### Oppsummert:
+✔ Få en Parcel til å bygge en React applikasjon <br/>
+✔ Få React Router til å navigere rundt i applikasjonen <br/>
+✔ Få React til å hente og lagre informasjon til et API <br/>
+✔ Få Github Actions til å kjøre Jest-testene og publisere coverage til Coveralls <br/>
+✔ Få Heroku til å publisere websidene <br/>
+
+#### Express-serveren skal ha følgende API:
+✔ GET /api/question - returnerer et tilfeldig spørsmål med { id, category, 
+question, answers } <br/>
+✔ POST /api/question - tar inn { id, answer } og returnerer "true" eller "false"
