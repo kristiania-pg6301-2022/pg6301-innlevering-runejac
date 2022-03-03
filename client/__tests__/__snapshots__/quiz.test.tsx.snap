@@ -8,8 +8,10 @@ exports[`quiz pages should register correct answer with simulate click 1`] = `
   <div data-testid=\\"answer_a\\"><button class=\\"button\\" name=\\"answer\\">The turtle</button></div>
   <div data-testid=\\"answer_b\\"><button class=\\"button\\" name=\\"answer\\">The sloth</button></div>
 </div>
-<div>
-  <p class=\\"score-txt\\" data-testid=\\"score-status\\">1 / 1 correct answered</p>
+<div class=\\"score-wrapper\\" data-testid=\\"score-status\\">
+  <p class=\\"score-txt-correct\\">1</p>
+  <p class=\\"score-text-separator\\"> / </p>
+  <p class=\\"score-txt-answered\\">1</p>
 </div>
 <div><a class=\\"home\\" href=\\"/\\">Home</a></div>"
 `;
@@ -20,8 +22,10 @@ exports[`quiz pages should register wrong answer with simulate click 1`] = `
   <div data-testid=\\"answer_a\\"><button class=\\"button\\" name=\\"answer\\">The turtle</button></div>
   <div data-testid=\\"answer_b\\"><button class=\\"button\\" name=\\"answer\\">The sloth</button></div>
 </div>
-<div>
-  <p class=\\"score-txt\\" data-testid=\\"score-status\\">0 / 1 correct answered</p>
+<div class=\\"score-wrapper\\" data-testid=\\"score-status\\">
+  <p class=\\"score-txt-correct\\">0</p>
+  <p class=\\"score-text-separator\\"> / </p>
+  <p class=\\"score-txt-answered\\">1</p>
 </div>
 <div><a class=\\"home\\" href=\\"/\\">Home</a></div>"
 `;
@@ -29,8 +33,10 @@ exports[`quiz pages should register wrong answer with simulate click 1`] = `
 exports[`quiz pages should render FrontPage component, correct and answered score 1`] = `
 "<div>
   <h1 class=\\"question-and-score-txt\\">Take a quiz</h1>
-  <div>
-    <p class=\\"score-txt\\" data-testid=\\"score-status\\">1 / 2 correct answered</p>
+  <div class=\\"score-wrapper\\" data-testid=\\"score-status\\">
+    <p class=\\"score-txt-correct\\">1</p>
+    <p class=\\"score-text-separator\\"> / </p>
+    <p class=\\"score-txt-answered\\">2</p>
   </div>
   <div><a class=\\"home\\" href=\\"/question\\">New quiz</a></div>
 </div>"
@@ -41,16 +47,20 @@ exports[`quiz pages should render Home component 1`] = `"<div><a class=\\"home\\
 exports[`quiz pages should render Quiz component 1`] = `
 "<div>
   <h1 class=\\"question-and-score-txt\\">Take a quiz</h1>
-  <div>
-    <p class=\\"score-txt\\" data-testid=\\"score-status\\"> / correct answered</p>
+  <div class=\\"score-wrapper\\" data-testid=\\"score-status\\">
+    <p class=\\"score-txt-correct\\"></p>
+    <p class=\\"score-text-separator\\"> / </p>
+    <p class=\\"score-txt-answered\\"></p>
   </div>
   <div><a class=\\"home\\" href=\\"/question\\">New quiz</a></div>
 </div>"
 `;
 
 exports[`quiz pages should render Score component, correct and answered score 1`] = `
-"<div>
-  <p class=\\"score-txt\\" data-testid=\\"score-status\\">4 / 5 correct answered</p>
+"<div class=\\"score-wrapper\\" data-testid=\\"score-status\\">
+  <p class=\\"score-txt-correct\\">4</p>
+  <p class=\\"score-text-separator\\"> / </p>
+  <p class=\\"score-txt-answered\\">5</p>
 </div>"
 `;
 
@@ -80,8 +90,10 @@ exports[`quiz pages should render a question and its answer options 1`] = `
   <div data-testid=\\"answer_a\\"><button class=\\"button\\" name=\\"answer\\">The turtle</button></div>
   <div data-testid=\\"answer_b\\"><button class=\\"button\\" name=\\"answer\\">The sloth</button></div>
 </div>
-<div>
-  <p class=\\"score-txt\\" data-testid=\\"score-status\\">0 / 0 correct answered</p>
+<div class=\\"score-wrapper\\" data-testid=\\"score-status\\">
+  <p class=\\"score-txt-correct\\">0</p>
+  <p class=\\"score-text-separator\\"> / </p>
+  <p class=\\"score-txt-answered\\">0</p>
 </div>
 <div><a class=\\"home\\" href=\\"/\\">Home</a></div>"
 `;

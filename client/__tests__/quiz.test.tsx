@@ -6,11 +6,7 @@ import "regenerator-runtime/runtime";
 import { Home } from "../components/pages/Home";
 import { FrontPage } from "../components/pages/FrontPage";
 import { ShowAnswer } from "../components/pages/ShowAnswer";
-import {
-  isCorrectAnswer,
-  QuestionAnimals,
-  randomQuestion,
-} from "../questions-animals";
+import { randomQuestion } from "../questions-animals";
 import pretty from "pretty";
 import { Score } from "../components/Score";
 import { QuestionAndAnswers } from "../components/QuestionAndAnswers";
@@ -100,7 +96,7 @@ describe("quiz pages", () => {
 
     expect(
       container.querySelector("[data-testid=score-status]")?.textContent
-    ).toEqual("4 / 5 correct answered");
+    ).toEqual("4 / 5");
     expect(pretty(container.innerHTML)).toMatchSnapshot();
   });
 
@@ -113,7 +109,7 @@ describe("quiz pages", () => {
     );
     expect(
       container.querySelector("[data-testid=score-status]")?.textContent
-    ).toEqual("1 / 2 correct answered");
+    ).toEqual("1 / 2");
     expect(pretty(container.innerHTML)).toMatchSnapshot();
   });
 
@@ -213,7 +209,7 @@ describe("quiz pages", () => {
     expect(pretty(container.innerHTML)).toMatchSnapshot();
     expect(
       container.querySelector("[data-testid=score-status]")?.textContent
-    ).toEqual("1 / 1 correct answered");
+    ).toEqual("1 / 1");
   });
 
   it("should register wrong answer with simulate click", async function () {
@@ -249,7 +245,7 @@ describe("quiz pages", () => {
     expect(pretty(container.innerHTML)).toMatchSnapshot();
     expect(
       container.querySelector("[data-testid=score-status]")?.textContent
-    ).toEqual("0 / 1 correct answered");
+    ).toEqual("0 / 1");
   });
 
   it("should get keys from dummy object", function () {

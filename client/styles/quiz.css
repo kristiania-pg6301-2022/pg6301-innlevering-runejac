@@ -33,12 +33,50 @@
     font: inherit;
 }
 
-.score-txt {
+.score-txt-correct {
     display: flex;
+    align-items: center;
     justify-content: center;
     font: inherit;
     background-color: rgba(0, 255, 0, 0.1);
     border: 1px solid #00ff0e;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+.score-text-separator {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    font: inherit;
+    margin-top: 12px;
+    width: 120px;
+    padding: 20px;
+    z-index: -1;
+}
+
+.score-txt-answered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font: inherit;
+    background-color: rgba(255, 119, 0, 0.1);
+    border: 1px solid #ff9100;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    padding: 5px;
+    margin-bottom: 5px;
+    margin-left: 20px;
+}
+
+.score-wrapper {
+    display: flex;
+    justify-content: center;
 }
 
 .ul {
@@ -73,7 +111,7 @@ body {
     background-color: #131313;
     color: #e8e8e8;
     font-family: "Leelawadee UI Semilight", sans-serif;
-    font-size: 25px;
+    font-size: 20px;
     max-width: 500px;
     margin: auto;
 }
