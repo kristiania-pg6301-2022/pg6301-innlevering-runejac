@@ -1,7 +1,7 @@
-// GET request
-import { HttpError } from "./http";
+import HttpError from "./http";
 
 export async function getJSON(apiUrl: RequestInfo) {
+  // GET request
   const res = await fetch(apiUrl);
 
   if (res.status === 204) {
@@ -13,8 +13,8 @@ export async function getJSON(apiUrl: RequestInfo) {
   }
 }
 
-// POST request, må ha med method, headers og body
 export async function postJSON(
+  // POST request, må ha med method, headers og body
   apiUrl: RequestInfo,
   json: { answer: string; id: number }
 ) {
