@@ -5,8 +5,10 @@ import { getApis } from "./api/getApis";
 import { FrontPage } from "./components/pages/FrontPage";
 import { ShowAnswer } from "./components/pages/ShowAnswer";
 import { QuestionAndAnswers } from "./components/QuestionAndAnswers";
+import { HttpError } from "./api/http";
 
 export interface QuestionProps {
+  error?: HttpError;
   answered: number;
   correct: number;
   reloadScore?: () => void | Promise<void>;
@@ -18,7 +20,11 @@ export interface QuestionProps {
 }
 
 function Quiz() {
-  const { data: score, reload: reloadScore } = useLoader(getApis.scoreApi);
+  const {
+    data: score,
+    reload: reloadScore,
+    error,
+  } = useLoader(getApis.scoreApi);
 
   const correct: number = score?.correct;
   const answered: number = score?.answers;
@@ -41,6 +47,7 @@ function Quiz() {
             reloadScore={reloadScore}
             questionApi={getApis.questionApi}
             postAnswerApi={getApis.postAnswerApi}
+            error={error}
           />
         }
       />

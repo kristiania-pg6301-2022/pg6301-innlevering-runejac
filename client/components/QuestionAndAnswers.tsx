@@ -4,9 +4,11 @@ import { Score } from "./Score";
 import { Home } from "./pages/Home";
 import React from "react";
 import { QuestionProps } from "../Quiz";
+import { HttpError } from "../api/http";
 
 export function QuestionAndAnswers(props: QuestionProps) {
   const navigate = useNavigate();
+  const httpError = new HttpError(404, "404 Not found - Cannot get question");
   const {
     loading,
     error,
@@ -30,11 +32,7 @@ export function QuestionAndAnswers(props: QuestionProps) {
   }
 
   if (error) {
-    return (
-      <div className={"error-message"}>
-        An error occurred: {error.toString()}
-      </div>
-    );
+    return <div className={"error-message"}>{httpError.message}</div>;
   }
 
   if (!question || loading) return <h2>Loading...</h2>;

@@ -11,7 +11,7 @@ import pretty from "pretty";
 import { Score } from "../components/Score";
 import { QuestionAndAnswers } from "../components/QuestionAndAnswers";
 import Quiz from "../Quiz";
-import { getApis } from "../api/getApis";
+import { HttpError } from "../api/http";
 
 describe("quiz pages", () => {
   let container: HTMLDivElement;
@@ -136,6 +136,7 @@ describe("quiz pages", () => {
   it("should trigger an error on trying to receive a question", async function () {
     let answered: number;
     let correct: number;
+    const error = new HttpError(404, "No Content - no question found");
 
     await act(async () => {
       render(
@@ -144,6 +145,7 @@ describe("quiz pages", () => {
             answered={answered}
             correct={correct}
             questionApi={undefined}
+            error={error}
           />
         </MemoryRouter>,
         container

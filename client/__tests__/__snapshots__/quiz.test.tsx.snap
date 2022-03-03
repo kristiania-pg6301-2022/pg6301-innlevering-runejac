@@ -86,4 +86,4 @@ exports[`quiz pages should render a question and its answer options 1`] = `
 <div><a class=\\"home\\" href=\\"/\\">Home</a></div>"
 `;
 
-exports[`quiz pages should trigger an error on trying to receive a question 1`] = `"<div class=\\"error-message\\">An error occurred: TypeError: loadingFn is not a function</div>"`;
+exports[`quiz pages should trigger an error on trying to receive a question 1`] = `"<div class=\\"error-message\\">Custom exception thrown: 404 Not found - Cannot get question</div>"`;
