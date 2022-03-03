@@ -21,7 +21,7 @@
 
 <h3 align="center">
 
-https://innlevering-quiz-runejac.herokuapp.com/
+https://pg6301-innlevering-runejac.herokuapp.com/
 
 </h3>
 
