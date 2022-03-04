@@ -2,7 +2,7 @@ import express, { Express } from "express";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import request from "supertest";
-import { quizApi } from "../server/quizApi";
+import { quizApi } from "../quizApi";
 
 const app: Express = express();
 app.use(bodyParser.json());

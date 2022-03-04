@@ -7,10 +7,9 @@
     "start": "ts-node server.ts",
     "build": "npm install",
     "dev": "nodemon --ext ts,js,json --exec npm start",
-    "format": "prettier --write **/*.{tsx,jsx,ts,js,html,json}",
-    "format:check": "prettier --check **/*.{tsx,jsx,ts,js,html,json}",
     "lint": "eslint **/*.{ts,tsx,js,jsx}",
-    "verify": "npm run format:check && tsc && npm run lint"
+    "verify": "npm run test:coverage && tsc && npm run lint",
+    "test:coverage": "jest --collectCoverage"
   },
   "keywords": [],
   "author": "",
@@ -34,7 +33,6 @@
     "jest": "^27.5.1",
     "nodemon": "^2.0.15",
     "parcel": "^2.2.1",
-    "prettier": "^2.5.1",
     "supertest": "^6.2.2",
     "typescript": "^4.5.5"
   },
@@ -45,29 +43,18 @@
     "express": "^4.17.2",
     "ts-node": "^10.5.0"
   },
-  "babel": {
-    "presets": [
-      [
-        "@babel/preset-env",
-        {
-          "targets": {
-            "node": "current"
-          }
-        }
-      ],
-      "@babel/preset-typescript",
-      "@babel/preset-flow"
-    ]
-  },
   "jest": {
     "collectCoverageFrom": [
       "**/*.{jsx,tsx,ts,js}",
+      "!server.ts",
       "!.eslintrc.js",
       "!coverage/**",
       "!dist/**",
       "!babel.config.js",
       "!index.tsx",
-      "!config/**"
+      "!config/**",
+      "!.d.ts",
+      "!custom.d.ts"
     ]
   }
 }

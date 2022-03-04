@@ -11,14 +11,13 @@
     "build:client": "cd client && npm ci --include=dev && npm run build",
     "build:server": "cd server && npm ci --include=dev",
     "test": "jest",
-    "format": "prettier --write **/*.{ts,jsx,js,tsx,json,html}",
-    "format:check": "prettier --check **/*.{js,ts,tsx,jsx,json,html}",
+    "format": "prettier --write **/*.{ts,jsx,js,tsx,json}",
+    "format:check": "prettier --check **/*.{js,ts,tsx,jsx,json}",
     "clean": "cd client && rimraf dist .parcel-cache",
-    "verify": "npm run test:coverage && npm run verify:server && npm run verify:client",
-    "verify:server": "cd server && npm ci && npm run verify",
-    "verify:client": "cd client && npm ci && npm run verify",
-    "prepare": "husky install",
-    "test:coverage": "jest --coverage"
+    "verify": "npm run verify:server && npm run verify:client",
+    "verify:server": "cd server && npm run verify",
+    "verify:client": "cd client && npm run verify",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -41,7 +40,6 @@
     "@types/cookie-parser": "^1.4.2",
     "@types/express": "^4.17.13",
     "@types/jest": "^27.4.0",
-    "@types/pretty": "^2.0.1",
     "@types/react": "^17.0.39",
     "@types/react-dom": "^17.0.11",
     "@types/react-router-dom": "^5.3.3",
@@ -57,10 +55,7 @@
     "eslint-plugin-react": "^7.28.0",
     "husky": "^7.0.4",
     "jest": "^27.5.0",
-    "parcel": "^2.2.1",
     "prettier": "^2.5.1",
-    "pretty": "^2.0.0",
-    "supertest": "^6.2.2",
     "typescript": "^4.5.5"
   },
   "dependencies": {
@@ -94,15 +89,16 @@
     "collectCoverageFrom": [
       "**/*.{jsx,tsx,ts,js}",
       "!.eslintrc.js",
-      "!coverage/**",
       "!client/coverage/**",
+      "!server/coverage/**",
       "!client/dist/**",
       "!server/server.ts",
       "!dist/**",
-      "!babel.config.js",
+      "!server/babel.config.js",
+      "!client/babel.config.js",
       "!client/index.tsx",
-      "!config/**",
-      "!.d.ts"
+      "!server/.d.ts",
+      "!server/custom.d.ts"
     ]
   },
   "engines": {

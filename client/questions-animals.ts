@@ -1,5 +1,4 @@
 export interface QuestionAnimals {
-  // todo egen info: endret id til ikke-optional, for POST req
   id: number;
   question: string;
   description?: string | null;

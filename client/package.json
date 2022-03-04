@@ -7,10 +7,9 @@
     "build": "parcel build index.html",
     "test": "jest",
     "clean": "rimraf dist .parcel-cache",
-    "format": "prettier --write *.{ts,jsx,js,tsx} .././__tests__/**/*.{ts,jsx,js,tsx}",
-    "format:check": "prettier --check *.{ts,jsx,js,tsx} .././__tests__/**/*.{ts,jsx,js,tsx}",
     "lint": "eslint **/*.{ts,tsx,js,jsx}",
-    "verify": "npm run format:check && tsc && npm run lint"
+    "verify": "npm run test:coverage && tsc && npm run lint",
+    "test:coverage": "jest --collectCoverage"
   },
   "keywords": [],
   "author": "",
@@ -22,6 +21,7 @@
     "@babel/preset-react": "^7.16.7",
     "@babel/preset-typescript": "^7.16.7",
     "@types/jest": "^27.4.0",
+    "@types/pretty": "^2.0.1",
     "@types/react": "^17.0.39",
     "@types/react-dom": "^17.0.11",
     "@types/react-router-dom": "^5.3.3",
@@ -33,7 +33,7 @@
     "eslint-plugin-react": "^7.28.0",
     "jest": "^27.5.0",
     "parcel": "^2.2.1",
-    "prettier": "^2.5.1",
+    "pretty": "^2.0.0",
     "regenerator-runtime": "^0.13.9",
     "rimraf": "^3.0.2",
     "typescript": "^4.5.5"
