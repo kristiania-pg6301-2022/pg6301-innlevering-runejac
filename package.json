@@ -102,7 +102,7 @@
       "!client/index.tsx",
       "!server/.d.ts",
       "!server/custom.d.ts",
-      "!coverage",
+      "!coverage/**",
       "!babel.config.js"
     ]
   },
