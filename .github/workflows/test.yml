@@ -15,7 +15,7 @@ jobs:
         with:
           node-version: 16.x
           cache: 'npm'
-      - run: npm ci
+      - run: npm install
       - run: npm install
         working-directory: client
       - run: npm install
@@ -24,5 +24,4 @@ jobs:
       - name: Coveralls
         uses: coverallsapp/github-action@master
         with:
-          path-to-lcov: ${{ github.workspace }}/client/coverage/lcov.info && ${{ github.workspace }}/server/coverage/lcov.info
           github-token: ${{ secrets.GITHUB_TOKEN }}
