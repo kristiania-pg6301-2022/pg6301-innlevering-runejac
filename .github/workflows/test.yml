@@ -17,12 +17,11 @@ jobs:
           cache: 'npm'
       - run: npm ci
       - run: npm install
-        working-directory: client
+        working-directory: ${{ github.workspace }}/client
       - run: npm install
-        working-directory: server
+        working-directory: ${{ github.workspace }}/server
       - run: npm run verify
       - name: Coveralls
         uses: coverallsapp/github-action@master
         with:
-          path-to-lcov: coverage/lcov.info
           github-token: ${{ secrets.GITHUB_TOKEN }}
