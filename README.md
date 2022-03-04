@@ -35,7 +35,7 @@ https://pg6301-innlevering-runejac.herokuapp.com/
 * [x] tester for server
 * [x] tester for client (ikke helt done)
 * [x] github actions (🟢)
-* [ ] itsDone(ok: Chill)
+* [x] itsDone(ok: Chill)
 
 ---
 

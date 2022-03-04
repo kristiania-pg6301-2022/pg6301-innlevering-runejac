@@ -180,8 +180,8 @@ describe("quiz pages", () => {
 
   it("should register correct answer with simulate click", async function () {
     const reload = jest.fn();
-    const answer = questionApi().correct_answers.answer_b_correct;
-    const id = questionApi().id;
+    //const answer = questionApi().correct_answers.answer_b_correct;
+    //const id = questionApi().id;
     const postAnswer = jest.fn().mockImplementation(randomQuestion);
     const answered = jest.fn((x: number) => x + 1);
     const correct = jest.fn((x: number) => x + 1);
@@ -219,8 +219,6 @@ describe("quiz pages", () => {
     // fake grønn, er ikke randomQuestion som skal mockes her
     const answered = jest.fn((x: number) => x + 1);
     const correct = jest.fn((x: number) => x);
-
-    // TODO får ikke til å få correct answer fra score GET (enda)
 
     await act(async () => {
       render(

@@ -1,7 +1,7 @@
 {
   "name": "innlevering-quiz-med-server-heroku",
   "version": "1.0.0",
-  "description": "* [x] lag client siden\r * [x] lag tester for client\r * [ ] coveralls io\r * [ ] lag server siden\r * [ ] lag tester for server\r * [ ] deploy til Heroku",
+  "description": "Quiz page built with React, Express, Node, TypeScript",
   "scripts": {
     "start": "cd server && npm run start",
     "dev": "concurrently npm:dev:server npm:dev:client",
@@ -23,19 +23,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/runejac/web-api-own-account-innlevering-runejac"
+    "url": "git+https://github.com/kristiania-pg6301-2022/pg6301-innlevering-runejac"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/runejac/web-api-own-account-innlevering-runejac/issues"
+    "url": "https://github.com/kristiania-pg6301-2022/pg6301-innlevering-runejac"
   },
-  "homepage": "https://github.com/runejac/web-api-own-account-innlevering-runejac#readme",
+  "homepage": "https://github.com/kristiania-pg6301-2022/pg6301-innlevering-runejac#readme",
   "devDependencies": {
-    "@babel/core": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
-    "@babel/preset-flow": "^7.16.7",
     "@babel/preset-react": "^7.16.7",
     "@babel/preset-typescript": "^7.16.7",
     "@types/jest": "^27.4.0",
