@@ -15,9 +15,10 @@
     "format:check": "prettier --check **/*.{js,ts,tsx,jsx,json}",
     "clean": "cd client && rimraf dist .parcel-cache",
     "lint": "eslint **/*.{ts,tsx,js,jsx}",
-    "verify": "npm run lint && npm run verify:server && npm run verify:client",
+    "verify": "npm run format:check && npm run lint && npm run test:coverage && npm run verify:server && npm run verify:client",
     "verify:server": "cd server && npm run verify",
     "verify:client": "cd client && npm run verify",
+    "test:coverage": "jest --collectCoverage",
     "prepare": "husky install"
   },
   "repository": {
@@ -50,6 +51,7 @@
     "babel": "^6.23.0",
     "babel-jest": "^27.5.0",
     "concurrently": "^7.0.0",
+    "coveralls": "^3.1.1",
     "eslint": "^8.8.0",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-prettier": "^4.0.0",
@@ -99,7 +101,9 @@
       "!client/babel.config.js",
       "!client/index.tsx",
       "!server/.d.ts",
-      "!server/custom.d.ts"
+      "!server/custom.d.ts",
+      "!coverage",
+      "!babel.config.js"
     ]
   },
   "engines": {

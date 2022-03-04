@@ -7,7 +7,7 @@
     "build": "parcel build index.html",
     "test": "jest",
     "clean": "rimraf dist .parcel-cache",
-    "verify": "npm run test:coverage && tsc",
+    "verify": "tsc",
     "test:coverage": "jest --collectCoverage"
   },
   "keywords": [],
