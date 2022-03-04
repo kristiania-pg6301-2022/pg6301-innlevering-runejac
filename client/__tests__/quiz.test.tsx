@@ -48,6 +48,7 @@ describe("quiz pages", () => {
         <MemoryRouter>
           <Quiz />
         </MemoryRouter>,
+
         container
       );
     });
