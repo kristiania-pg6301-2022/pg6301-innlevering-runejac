@@ -1,0 +1,91 @@
+{
+  "name": "innlevering-quiz-med-server-heroku",
+  "version": "1.0.0",
+  "description": "Quiz page built with React, Express, Node, TypeScript",
+  "scripts": {
+    "start": "cd server && npm run start",
+    "dev": "concurrently npm:dev:server npm:dev:client",
+    "dev:client": "cd client && npm run dev",
+    "dev:server": "cd server && npm run dev",
+    "build": "npm run build:server && npm run build:client",
+    "build:client": "cd client && npm ci --include=dev && npm run build",
+    "build:server": "cd server && npm ci --include=dev",
+    "test": "jest",
+    "format": "prettier --write **/*.{ts,jsx,js,tsx,json}",
+    "format:check": "prettier --check **/*.{js,ts,tsx,jsx,json}",
+    "clean": "cd client && rimraf dist .parcel-cache",
+    "lint": "eslint **/*.{ts,tsx,js,jsx}",
+    "verify": "npm run format:check && npm run lint && npm run test:coverage && npm run verify:server && npm run verify:client",
+    "verify:server": "cd server && npm run verify",
+    "verify:client": "cd client && npm run verify",
+    "test:coverage": "jest --collectCoverage",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kristiania-pg6301-2022/pg6301-innlevering-runejac"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kristiania-pg6301-2022/pg6301-innlevering-runejac"
+  },
+  "homepage": "https://github.com/kristiania-pg6301-2022/pg6301-innlevering-runejac#readme",
+  "devDependencies": {
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "@babel/preset-typescript": "^7.16.7",
+    "@types/jest": "^27.4.0",
+    "@typescript-eslint/eslint-plugin": "^5.11.0",
+    "@typescript-eslint/parser": "^5.11.0",
+    "babel": "^6.23.0",
+    "babel-jest": "^27.5.0",
+    "concurrently": "^7.0.0",
+    "eslint": "^8.8.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.28.0",
+    "husky": "^7.0.4",
+    "jest": "^27.5.0",
+    "prettier": "^2.5.1",
+    "typescript": "^4.5.5"
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ],
+      "@babel/preset-typescript",
+      "@babel/preset-flow"
+    ]
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "collectCoverageFrom": [
+      "**/*.{jsx,tsx,ts,js}",
+      "!.eslintrc.js",
+      "!client/coverage/**",
+      "!server/coverage/**",
+      "!client/dist/**",
+      "!server/server.ts",
+      "!dist/**",
+      "!server/babel.config.js",
+      "!client/babel.config.js",
+      "!client/index.tsx",
+      "!server/.d.ts",
+      "!server/custom.d.ts",
+      "!coverage/**",
+      "!babel.config.js"
+    ]
+  },
+  "engines": {
+    "node": ">=16.13.1",
+    "npm": ">=8.3.1"
+  }
+}

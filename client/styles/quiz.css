@@ -1,0 +1,123 @@
+.button {
+    font: inherit;
+    border: 1px solid #4f005f;
+    background: #4f005f;
+    padding: 0.75rem 3.5rem;
+    cursor: pointer;
+    margin: 20px 0 10px 0;
+    color: inherit;
+}
+
+.home {
+    font: inherit;
+    border: 1px solid #003e5f;
+    background: #003e5f;
+    padding: 0.75rem 3.5rem;
+    cursor: pointer;
+    border-radius: 30px;
+    margin: 20px 0 10px 0;
+    display: flex;
+    justify-content: center;
+    color: inherit;
+}
+
+.show-answer-div {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.question-and-score-txt {
+    display: flex;
+    justify-content: center;
+    font: inherit;
+}
+
+.score-txt-correct {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font: inherit;
+    background-color: rgba(0, 255, 0, 0.1);
+    border: 1px solid #00ff0e;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+.score-text-separator {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    font: inherit;
+    margin-top: 12px;
+    width: 120px;
+    padding: 20px;
+    z-index: -1;
+}
+
+.score-txt-answered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font: inherit;
+    background-color: rgba(255, 119, 0, 0.1);
+    border: 1px solid #ff9100;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    padding: 5px;
+    margin-bottom: 5px;
+    margin-left: 20px;
+}
+
+.score-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding-inline-start: 0;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+.home:hover,
+.home:active {
+    border-color: #006098;
+    background-color: inherit;
+}
+
+.button:hover,
+.button:active {
+    background: #741188;
+    border-color: #741188;
+}
+
+.button:focus {
+    outline: none;
+}
+
+body {
+    background-color: #131313;
+    color: #e8e8e8;
+    font-family: "Leelawadee UI Semilight", sans-serif;
+    font-size: 20px;
+    max-width: 500px;
+    margin: auto;
+}
+
+.error-message {
+    border: 1px solid red;
+    background: pink;
+    color: black;
+}

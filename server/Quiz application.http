@@ -1,0 +1,32 @@
+### GET frontpage
+GET {{server}}
+Accept: text/html
+
+### GET api random question and its answer options
+GET {{server}}/api/question/random
+Accept: application/json
+
+### GET api score
+GET {{server}}/api/question/score
+Accept: application/json
+
+### GET api wrong url
+GET {{server}}/api/*
+
+### POST api correct answer
+POST {{server}}/api/question/answer
+Content-Type: application/json
+
+{
+  "id": 974,
+  "answer": "answer_d"
+}
+
+### POST api incorrect answer
+POST {{server}}/api/question/answer
+Content-Type: application/json
+
+{
+  "id": 976,
+  "answer": "answer_d"
+}
