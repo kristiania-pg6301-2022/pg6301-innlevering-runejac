@@ -26,6 +26,7 @@ export function QuestionAndAnswers(props: QuestionProps) {
     );
 
     props.reloadScore!();
+
     // for å refreshe "score" så brukes reload fra /api/question/score- kallet
     if (answerSent.isCorrect) {
       navigate("/answer/correct");
